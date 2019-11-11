@@ -20,14 +20,6 @@ namespace PicadoDentalWS.Service
     public class EF_PicadoDental : System.Web.Services.WebService
     {
 
-
-        //[WebMethod]
-        //public List<Cliente> ClientList()
-        //{
-        //    ClienteViewModel clienteList = new ClienteViewModel();
-        //    return db.Clientes.ToList();
-        //}
-
         short personaID;
 
         [WebMethod]
@@ -54,11 +46,8 @@ namespace PicadoDentalWS.Service
                 {
                     return false;
                 }
-
             }
         }
-
-
 
         /// <summary>
         /// devuelve lista de clientes
