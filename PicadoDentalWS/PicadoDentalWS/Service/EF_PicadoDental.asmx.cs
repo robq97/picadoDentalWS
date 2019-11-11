@@ -30,6 +30,35 @@ namespace PicadoDentalWS.Service
 
         short personaID;
 
+        [WebMethod]
+        public Boolean LogIn(string usuario, string contrasena)
+        {
+            using (PDEntities e = new PDEntities())
+            {
+                try
+                {
+                    var myUser = e.Usuarios
+                    .FirstOrDefault(u => u.Usuario1 == usuario
+                     && u.Contrasena == contrasena);
+
+                    if (myUser != null)  
+                    {
+                        return true;
+                    }
+                    else    
+                    {
+                        return false;
+                    }
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+
+            }
+        }
+
+
 
         /// <summary>
         /// devuelve lista de clientes
