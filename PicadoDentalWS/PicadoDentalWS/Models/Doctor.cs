@@ -12,12 +12,21 @@ namespace PicadoDentalWS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Admin
+    public partial class Doctor
     {
-        public short AdminId { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Doctor()
+        {
+            this.Citas = new List<Cita>();
+        }
+    
+        public short DoctorId { get; set; }
         public short PersonaId { get; set; }
         public short UsuarioId { get; set; }
+        public string Especialidad { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual List<Cita> Citas { get; set; }
         public virtual Persona Persona { get; set; }
         public virtual Usuario Usuario { get; set; }
     }

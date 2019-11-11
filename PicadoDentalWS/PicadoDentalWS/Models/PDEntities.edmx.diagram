@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3e0283000356489b91f1f7e70d4a1c14" Name="Diagram1">
+        <EntityTypeShape EntityType="PDModel.Admin" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PDModel.Cita" Width="1.5" PointX="7.5" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PDModel.Cliente" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PDModel.Doctor" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PDModel.Genero" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PDModel.Persona" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PDModel.sysdiagram" Width="1.5" PointX="7.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PDModel.Usuario" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="PDModel.FK_Admin_Persona" ManuallyRouted="false" />
+        <AssociationConnector Association="PDModel.FK_Admin_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="PDModel.FK_Cita_Cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="PDModel.FK_Cita_Doctor" ManuallyRouted="false" />
+        <AssociationConnector Association="PDModel.FK_Cliente_Persona" ManuallyRouted="false" />
+        <AssociationConnector Association="PDModel.FK_Doctor_Persona" ManuallyRouted="false" />
+        <AssociationConnector Association="PDModel.FK_Doctor_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="PDModel.FK_Persona_Genero" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

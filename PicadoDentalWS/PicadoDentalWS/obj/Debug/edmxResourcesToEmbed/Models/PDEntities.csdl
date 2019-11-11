@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="AdminId" />
+    </Key>
+    <Property Name="AdminId" Type="Int16" Nullable="false" />
+    <Property Name="PersonaId" Type="Int16" Nullable="false" />
+    <Property Name="UsuarioId" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="Persona" Relationship="Self.FK_Admin_Persona" FromRole="Admin" ToRole="Persona" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Admin_Usuario" FromRole="Admin" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Cita">
+    <Key>
+      <PropertyRef Name="CitaId" />
+    </Key>
+    <Property Name="CitaId" Type="Int16" Nullable="false" />
+    <Property Name="ClienteId" Type="Int16" Nullable="false" />
+    <Property Name="DoctorId" Type="Int16" Nullable="false" />
+    <Property Name="FechaHora" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Comentarios" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Cliente" Relationship="Self.FK_Cita_Cliente" FromRole="Cita" ToRole="Cliente" />
+    <NavigationProperty Name="Doctor" Relationship="Self.FK_Cita_Doctor" FromRole="Cita" ToRole="Doctor" />
+  </EntityType>
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="ClienteId" />
+    </Key>
+    <Property Name="ClienteId" Type="Int16" Nullable="false" />
+    <Property Name="PersonaId" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="Citas" Relationship="Self.FK_Cita_Cliente" FromRole="Cliente" ToRole="Cita" />
+    <NavigationProperty Name="Persona" Relationship="Self.FK_Cliente_Persona" FromRole="Cliente" ToRole="Persona" />
+  </EntityType>
+  <EntityType Name="Doctor">
+    <Key>
+      <PropertyRef Name="DoctorId" />
+    </Key>
+    <Property Name="DoctorId" Type="Int16" Nullable="false" />
+    <Property Name="PersonaId" Type="Int16" Nullable="false" />
+    <Property Name="UsuarioId" Type="Int16" Nullable="false" />
+    <Property Name="Especialidad" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Citas" Relationship="Self.FK_Cita_Doctor" FromRole="Doctor" ToRole="Cita" />
+    <NavigationProperty Name="Persona" Relationship="Self.FK_Doctor_Persona" FromRole="Doctor" ToRole="Persona" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Doctor_Usuario" FromRole="Doctor" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Genero">
+    <Key>
+      <PropertyRef Name="GeneroId" />
+    </Key>
+    <Property Name="GeneroId" Type="Int16" Nullable="false" />
+    <Property Name="Descipcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Personas" Relationship="Self.FK_Persona_Genero" FromRole="Genero" ToRole="Persona" />
+  </EntityType>
+  <EntityType Name="Persona">
+    <Key>
+      <PropertyRef Name="PersonaId" />
+    </Key>
+    <Property Name="PersonaId" Type="Int16" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PrimerApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SegundoApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="GeneroId" Type="Int16" />
+    <NavigationProperty Name="Admins" Relationship="Self.FK_Admin_Persona" FromRole="Persona" ToRole="Admin" />
+    <NavigationProperty Name="Clientes" Relationship="Self.FK_Cliente_Persona" FromRole="Persona" ToRole="Cliente" />
+    <NavigationProperty Name="Doctors" Relationship="Self.FK_Doctor_Persona" FromRole="Persona" ToRole="Doctor" />
+    <NavigationProperty Name="Genero" Relationship="Self.FK_Persona_Genero" FromRole="Persona" ToRole="Genero" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="UsuarioId" />
+    </Key>
+    <Property Name="UsuarioId" Type="Int16" Nullable="false" />
+    <Property Name="PersonaId" Type="Int16" />
+    <Property Name="Usuario1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Contrasena" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Admins" Relationship="Self.FK_Admin_Usuario" FromRole="Usuario" ToRole="Admin" />
+    <NavigationProperty Name="Doctors" Relationship="Self.FK_Doctor_Usuario" FromRole="Usuario" ToRole="Doctor" />
+  </EntityType>
+  <Association Name="FK_Admin_Persona">
+    <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+    <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persona">
+        <PropertyRef Name="PersonaId" />
+      </Principal>
+      <Dependent Role="Admin">
+        <PropertyRef Name="PersonaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Admin_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="UsuarioId" />
+      </Principal>
+      <Dependent Role="Admin">
+        <PropertyRef Name="UsuarioId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cita_Cliente">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+    <End Role="Cita" Type="Self.Cita" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="ClienteId" />
+      </Principal>
+      <Dependent Role="Cita">
+        <PropertyRef Name="ClienteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cita_Doctor">
+    <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+    <End Role="Cita" Type="Self.Cita" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Doctor">
+        <PropertyRef Name="DoctorId" />
+      </Principal>
+      <Dependent Role="Cita">
+        <PropertyRef Name="DoctorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cliente_Persona">
+    <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persona">
+        <PropertyRef Name="PersonaId" />
+      </Principal>
+      <Dependent Role="Cliente">
+        <PropertyRef Name="PersonaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Doctor_Persona">
+    <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+    <End Role="Doctor" Type="Self.Doctor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persona">
+        <PropertyRef Name="PersonaId" />
+      </Principal>
+      <Dependent Role="Doctor">
+        <PropertyRef Name="PersonaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Doctor_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Doctor" Type="Self.Doctor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="UsuarioId" />
+      </Principal>
+      <Dependent Role="Doctor">
+        <PropertyRef Name="UsuarioId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Persona_Genero">
+    <End Role="Genero" Type="Self.Genero" Multiplicity="0..1" />
+    <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genero">
+        <PropertyRef Name="GeneroId" />
+      </Principal>
+      <Dependent Role="Persona">
+        <PropertyRef Name="GeneroId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PDEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Admins" EntityType="Self.Admin" />
+    <EntitySet Name="Citas" EntityType="Self.Cita" />
+    <EntitySet Name="Clientes" EntityType="Self.Cliente" />
+    <EntitySet Name="Doctors" EntityType="Self.Doctor" />
+    <EntitySet Name="Generoes" EntityType="Self.Genero" />
+    <EntitySet Name="Personas" EntityType="Self.Persona" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
+    <AssociationSet Name="FK_Admin_Persona" Association="Self.FK_Admin_Persona">
+      <End Role="Persona" EntitySet="Personas" />
+      <End Role="Admin" EntitySet="Admins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Admin_Usuario" Association="Self.FK_Admin_Usuario">
+      <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="Admin" EntitySet="Admins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cita_Cliente" Association="Self.FK_Cita_Cliente">
+      <End Role="Cliente" EntitySet="Clientes" />
+      <End Role="Cita" EntitySet="Citas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cita_Doctor" Association="Self.FK_Cita_Doctor">
+      <End Role="Doctor" EntitySet="Doctors" />
+      <End Role="Cita" EntitySet="Citas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cliente_Persona" Association="Self.FK_Cliente_Persona">
+      <End Role="Persona" EntitySet="Personas" />
+      <End Role="Cliente" EntitySet="Clientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Doctor_Persona" Association="Self.FK_Doctor_Persona">
+      <End Role="Persona" EntitySet="Personas" />
+      <End Role="Doctor" EntitySet="Doctors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Doctor_Usuario" Association="Self.FK_Doctor_Usuario">
+      <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="Doctor" EntitySet="Doctors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Persona_Genero" Association="Self.FK_Persona_Genero">
+      <End Role="Genero" EntitySet="Generoes" />
+      <End Role="Persona" EntitySet="Personas" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
