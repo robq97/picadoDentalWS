@@ -28,6 +28,7 @@ namespace PicadoDentalWS.Service
         //    return db.Clientes.ToList();
         //}
 
+        short personaID;
 
         [WebMethod]
         public List<Cliente> Read()
@@ -45,7 +46,7 @@ namespace PicadoDentalWS.Service
         }
 
         [WebMethod]
-        public void NewClient(short personaID, string nombre, string primerApellido, string segundoApellido, string telefono, string correo, byte generoID)
+        public void NewClient(string nombre, string primerApellido, string segundoApellido, string telefono, string correo, byte generoID)
         {
             using (PDEntities e = new PDEntities())
             {
@@ -61,7 +62,13 @@ namespace PicadoDentalWS.Service
                         Correo = correo,
                         GeneroId = generoID
                     });
+                    e.Clientes.Add(new Cliente()
+                    {
+                        PersonaId = personaID
+                    });
                     e.SaveChanges();
+
+
                 }
                 catch (Exception)
                 {
@@ -81,6 +88,9 @@ namespace PicadoDentalWS.Service
                     var client = new Persona { PersonaId = personaID };
                     e.Personas.Attach(client);
                     e.Personas.Remove(client);
+                    var person = new Cliente { PersonaId = personaID };
+                    e.Clientes.Attach(person);
+                    e.Clientes.Remove(person);
                     e.SaveChanges();
                 }
                 catch (Exception)
@@ -90,6 +100,69 @@ namespace PicadoDentalWS.Service
 
             }
         }
+
+        [WebMethod]
+        public void ModifyClient(short personaId, string telefono, string correo, byte generoID)
+        {
+            using (PDEntities e = new PDEntities())
+            {
+                try
+                {
+                    var persona = e.Personas.Where(s => s.PersonaId == personaId).First();
+
+                    persona.Telefono = telefono;
+                    persona.Correo = correo;
+                    e.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+
+            }
+        }
+        //
+        //
+        //
+        //
+        //
+        //
+        //Citas
+        //
+        //
+        //
+        //
+        //
+        //
+
+        [WebMethod]
+        public void NewAppointment(short clienteId, short doctorId, DateTime fechaHora, string descripcion, string comentarios)
+        {
+            using (PDEntities e = new PDEntities())
+            {
+                try
+                {
+                    e.Citas.Add(new Cita()
+                    {
+                        ClienteId = clienteId,
+                        DoctorId = doctorId,
+                        FechaHora = fechaHora,
+                        Descripcion = descripcion,
+                        Comentarios = comentarios
+                    });
+                    e.SaveChanges();
+
+
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+
+            }
+        }
+
+
 
 
 

@@ -1,4 +1,3 @@
-C:\Users\robq9\Documents\GitHub\picadoDentalWS\PicadoDentalWS\PicadoDentalWS\obj\Debug\PicadoDentalWS.csproj.CoreCompileInputs.cache
 C:\Users\robq9\Documents\GitHub\picadoDentalWS\PicadoDentalWS\PicadoDentalWS\bin\PicadoDentalWS.dll.config
 C:\Users\robq9\Documents\GitHub\picadoDentalWS\PicadoDentalWS\PicadoDentalWS\bin\PicadoDentalWS.dll
 C:\Users\robq9\Documents\GitHub\picadoDentalWS\PicadoDentalWS\PicadoDentalWS\bin\PicadoDentalWS.pdb
@@ -54,6 +53,8 @@ C:\Users\robq9\Documents\GitHub\picadoDentalWS\PicadoDentalWS\PicadoDentalWS\bin
 C:\Users\robq9\Documents\GitHub\picadoDentalWS\PicadoDentalWS\PicadoDentalWS\bin\EntityFramework.xml
 C:\Users\robq9\Documents\GitHub\picadoDentalWS\PicadoDentalWS\PicadoDentalWS\bin\EntityFramework.SqlServer.xml
 C:\Users\robq9\Documents\GitHub\picadoDentalWS\PicadoDentalWS\PicadoDentalWS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\robq9\Documents\GitHub\picadoDentalWS\PicadoDentalWS\PicadoDentalWS\obj\Debug\PicadoDentalWS.csprojAssemblyReference.cache
+C:\Users\robq9\Documents\GitHub\picadoDentalWS\PicadoDentalWS\PicadoDentalWS\obj\Debug\PicadoDentalWS.csproj.CoreCompileInputs.cache
 C:\Users\robq9\Documents\GitHub\picadoDentalWS\PicadoDentalWS\PicadoDentalWS\obj\Debug\PicadoDentalWS.csproj.CopyComplete
 C:\Users\robq9\Documents\GitHub\picadoDentalWS\PicadoDentalWS\PicadoDentalWS\obj\Debug\PicadoDentalWS.dll
 C:\Users\robq9\Documents\GitHub\picadoDentalWS\PicadoDentalWS\PicadoDentalWS\obj\Debug\PicadoDentalWS.pdb

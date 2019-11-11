@@ -4,7 +4,7 @@
     <Key>
       <PropertyRef Name="AdminId" />
     </Key>
-    <Property Name="AdminId" Type="smallint" Nullable="false" />
+    <Property Name="AdminId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PersonaId" Type="smallint" Nullable="false" />
     <Property Name="UsuarioId" Type="smallint" Nullable="false" />
   </EntityType>
@@ -12,10 +12,10 @@
     <Key>
       <PropertyRef Name="CitaId" />
     </Key>
-    <Property Name="CitaId" Type="smallint" Nullable="false" />
+    <Property Name="CitaId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ClienteId" Type="smallint" Nullable="false" />
     <Property Name="DoctorId" Type="smallint" Nullable="false" />
-    <Property Name="FechaHora" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="FechaHora" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
     <Property Name="Descripcion" Type="varchar" MaxLength="50" />
     <Property Name="Comentarios" Type="varchar" MaxLength="50" />
   </EntityType>
@@ -23,14 +23,14 @@
     <Key>
       <PropertyRef Name="ClienteId" />
     </Key>
-    <Property Name="ClienteId" Type="smallint" Nullable="false" />
+    <Property Name="ClienteId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PersonaId" Type="smallint" Nullable="false" />
   </EntityType>
   <EntityType Name="Doctor">
     <Key>
       <PropertyRef Name="DoctorId" />
     </Key>
-    <Property Name="DoctorId" Type="smallint" Nullable="false" />
+    <Property Name="DoctorId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PersonaId" Type="smallint" Nullable="false" />
     <Property Name="UsuarioId" Type="smallint" Nullable="false" />
     <Property Name="Especialidad" Type="nchar" MaxLength="10" />
@@ -39,14 +39,14 @@
     <Key>
       <PropertyRef Name="GeneroId" />
     </Key>
-    <Property Name="GeneroId" Type="smallint" Nullable="false" />
+    <Property Name="GeneroId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descipcion" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Persona">
     <Key>
       <PropertyRef Name="PersonaId" />
     </Key>
-    <Property Name="PersonaId" Type="smallint" Nullable="false" />
+    <Property Name="PersonaId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="varchar" MaxLength="50" />
     <Property Name="PrimerApellido" Type="varchar" MaxLength="50" />
     <Property Name="SegundoApellido" Type="varchar" MaxLength="50" />
@@ -68,7 +68,7 @@
     <Key>
       <PropertyRef Name="UsuarioId" />
     </Key>
-    <Property Name="UsuarioId" Type="smallint" Nullable="false" />
+    <Property Name="UsuarioId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PersonaId" Type="smallint" />
     <Property Name="Usuario" Type="nchar" MaxLength="10" />
     <Property Name="Contrasena" Type="nchar" MaxLength="10" />
