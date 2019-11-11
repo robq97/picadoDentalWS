@@ -176,7 +176,7 @@ namespace PicadoDentalWS.Service
                     {
                         ClienteId = clienteId,
                         DoctorId = doctorId,
-                        FechaHora = fechaHora,
+                        FechaHora = DateTime.Now,
                         Descripcion = descripcion,
                         Comentarios = comentarios
                     });
@@ -204,6 +204,9 @@ namespace PicadoDentalWS.Service
             {
                 try
                 {
+
+
+
                     var cita = e.Citas.Where(s => s.CitaId == citaId).First();
                     cita.DoctorId = doctorId;
                     cita.FechaHora = fechaHora;

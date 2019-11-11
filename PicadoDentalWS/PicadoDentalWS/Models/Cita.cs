@@ -17,7 +17,7 @@ namespace PicadoDentalWS.Models
         public short CitaId { get; set; }
         public short ClienteId { get; set; }
         public short DoctorId { get; set; }
-        public System.DateTime FechaHora { get; set; }
+        public System.DateTime? FechaHora { get; set; }
         public string Descripcion { get; set; }
         public string Comentarios { get; set; }
     

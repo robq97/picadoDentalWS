@@ -15,7 +15,7 @@
     <Property Name="CitaId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ClienteId" Type="smallint" Nullable="false" />
     <Property Name="DoctorId" Type="smallint" Nullable="false" />
-    <Property Name="FechaHora" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+    <Property Name="FechaHora" Type="datetime" StoreGeneratedPattern="Computed" />
     <Property Name="Descripcion" Type="varchar" MaxLength="50" />
     <Property Name="Comentarios" Type="varchar" MaxLength="50" />
   </EntityType>
