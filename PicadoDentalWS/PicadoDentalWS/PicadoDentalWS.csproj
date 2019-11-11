@@ -75,66 +75,73 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\PicadoDentalEntities.Context.tt">
+    <Content Include="Models\PDEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PicadoDentalEntities.Context.cs</LastGenOutput>
-      <DependentUpon>PicadoDentalEntities.edmx</DependentUpon>
+      <DependentUpon>PDEntities.edmx</DependentUpon>
+      <LastGenOutput>PDEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\PicadoDentalEntities.tt">
+    <Content Include="Models\PDEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PicadoDentalEntities.edmx</DependentUpon>
-      <LastGenOutput>PicadoDentalEntities.cs</LastGenOutput>
+      <DependentUpon>PDEntities.edmx</DependentUpon>
+      <LastGenOutput>PDEntities.cs</LastGenOutput>
     </Content>
     <Content Include="Service\EF_PicadoDental.asmx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Admin.cs">
-      <DependentUpon>PicadoDentalEntities.tt</DependentUpon>
+      <DependentUpon>PDEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Cita.cs">
-      <DependentUpon>PicadoDentalEntities.tt</DependentUpon>
+      <DependentUpon>PDEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Cliente.cs">
-      <DependentUpon>PicadoDentalEntities.tt</DependentUpon>
+      <DependentUpon>PDEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Doctor.cs">
+      <DependentUpon>PDEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Genero.cs">
-      <DependentUpon>PicadoDentalEntities.tt</DependentUpon>
+      <DependentUpon>PDEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PDEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PDEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PDEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PDEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PDEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PDEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Persona.cs">
-      <DependentUpon>PicadoDentalEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PicadoDentalEntities.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PicadoDentalEntities.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PicadoDentalEntities.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PicadoDentalEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PicadoDentalEntities.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PicadoDentalEntities.edmx</DependentUpon>
+      <DependentUpon>PDEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>PicadoDentalEntities.tt</DependentUpon>
+      <DependentUpon>PDEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usuario.cs">
+      <DependentUpon>PDEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\EF_PicadoDental.asmx.cs">
       <DependentUpon>EF_PicadoDental.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ViewModels\ClienteViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Models\PicadoDentalEntities.edmx">
+    <EntityDeploy Include="Models\PDEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PicadoDentalEntities.Designer.cs</LastGenOutput>
+      <LastGenOutput>PDEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\PicadoDentalEntities.edmx.diagram">
-      <DependentUpon>PicadoDentalEntities.edmx</DependentUpon>
+    <Content Include="Models\PDEntities.edmx.diagram">
+      <DependentUpon>PDEntities.edmx</DependentUpon>
     </Content>
     <None Include="packages.config" />
     <None Include="Web.Debug.config">

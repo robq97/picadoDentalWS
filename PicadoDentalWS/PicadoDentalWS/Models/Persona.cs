@@ -17,22 +17,25 @@ namespace PicadoDentalWS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Persona()
         {
-            this.Admins = new HashSet<Admin>();
-            this.Clientes = new HashSet<Cliente>();
+            this.Admins = new List<Admin>();
+            this.Clientes = new List<Cliente>();
+            this.Doctors = new List<Doctor>();
         }
     
-        public short PersonaID { get; set; }
+        public short PersonaId { get; set; }
         public string Nombre { get; set; }
         public string PrimerApellido { get; set; }
         public string SegundoApellido { get; set; }
         public string Telefono { get; set; }
         public string Correo { get; set; }
-        public byte GeneroID { get; set; }
+        public Nullable<short> GeneroId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Admin> Admins { get; set; }
+        public virtual List<Admin> Admins { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cliente> Clientes { get; set; }
+        public virtual List<Cliente> Clientes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual List<Doctor> Doctors { get; set; }
         public virtual Genero Genero { get; set; }
     }
 }

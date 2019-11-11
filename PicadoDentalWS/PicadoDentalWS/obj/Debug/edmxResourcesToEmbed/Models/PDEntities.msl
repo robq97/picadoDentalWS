@@ -1,58 +1,68 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="PicadoDentalModelStoreContainer" CdmEntityContainer="PicadoDentalEntities">
+  <EntityContainerMapping StorageEntityContainer="PDModelStoreContainer" CdmEntityContainer="PDEntities">
     <EntitySetMapping Name="Admins">
-      <EntityTypeMapping TypeName="PicadoDentalModel.Admin">
+      <EntityTypeMapping TypeName="PDModel.Admin">
         <MappingFragment StoreEntitySet="Admin">
-          <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
-          <ScalarProperty Name="PersonaId" ColumnName="PersonaId" />
           <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+          <ScalarProperty Name="PersonaId" ColumnName="PersonaId" />
+          <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Citas">
-      <EntityTypeMapping TypeName="PicadoDentalModel.Cita">
+      <EntityTypeMapping TypeName="PDModel.Cita">
         <MappingFragment StoreEntitySet="Cita">
-          <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
-          <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
-          <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
           <ScalarProperty Name="CitaId" ColumnName="CitaId" />
+          <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+          <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+          <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Clientes">
-      <EntityTypeMapping TypeName="PicadoDentalModel.Cliente">
+      <EntityTypeMapping TypeName="PDModel.Cliente">
         <MappingFragment StoreEntitySet="Cliente">
-          <ScalarProperty Name="PersonaId" ColumnName="PersonaId" />
           <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+          <ScalarProperty Name="PersonaId" ColumnName="PersonaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Doctors">
+      <EntityTypeMapping TypeName="PDModel.Doctor">
+        <MappingFragment StoreEntitySet="Doctor">
+          <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+          <ScalarProperty Name="PersonaId" ColumnName="PersonaId" />
+          <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+          <ScalarProperty Name="Especialidad" ColumnName="Especialidad" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Generoes">
-      <EntityTypeMapping TypeName="PicadoDentalModel.Genero">
+      <EntityTypeMapping TypeName="PDModel.Genero">
         <MappingFragment StoreEntitySet="Genero">
-          <ScalarProperty Name="Descipcion" ColumnName="Descipcion" />
           <ScalarProperty Name="GeneroId" ColumnName="GeneroId" />
+          <ScalarProperty Name="Descipcion" ColumnName="Descipcion" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Personas">
-      <EntityTypeMapping TypeName="PicadoDentalModel.Persona">
+      <EntityTypeMapping TypeName="PDModel.Persona">
         <MappingFragment StoreEntitySet="Persona">
-          <ScalarProperty Name="GeneroId" ColumnName="GeneroId" />
           <ScalarProperty Name="PersonaId" ColumnName="PersonaId" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
           <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
           <ScalarProperty Name="Telefono" ColumnName="Telefono" />
           <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="GeneroId" ColumnName="GeneroId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="PicadoDentalModel.sysdiagram">
+      <EntityTypeMapping TypeName="PDModel.sysdiagram">
         <MappingFragment StoreEntitySet="sysdiagrams">
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -62,23 +72,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Doctors">
-      <EntityTypeMapping TypeName="PicadoDentalModel.Doctor">
-        <MappingFragment StoreEntitySet="Doctor">
-          <ScalarProperty Name="Especialidad" ColumnName="Especialidad" />
-          <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
-          <ScalarProperty Name="PersonaId" ColumnName="PersonaId" />
-          <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Usuarios">
-      <EntityTypeMapping TypeName="PicadoDentalModel.Usuario">
+      <EntityTypeMapping TypeName="PDModel.Usuario">
         <MappingFragment StoreEntitySet="Usuario">
-          <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
-          <ScalarProperty Name="Usuario1" ColumnName="Usuario" />
-          <ScalarProperty Name="PersonaId" ColumnName="PersonaId" />
           <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+          <ScalarProperty Name="PersonaId" ColumnName="PersonaId" />
+          <ScalarProperty Name="Usuario1" ColumnName="Usuario" />
+          <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

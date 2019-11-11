@@ -3,6 +3,7 @@
   <EntityType Name="Admin">
     <Key>
       <PropertyRef Name="AdminID" />
+      <PropertyRef Name="AdminId" />
     </Key>
     <Property Name="AdminID" Type="Int16" Nullable="false" />
     <Property Name="PersonaID" Type="Int16" Nullable="false" />
@@ -10,52 +11,80 @@
     <Property Name="contrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Persona" Relationship="Self.FK_Admin_Persona" FromRole="Admin" ToRole="Persona" />
     <NavigationProperty Name="Citas" Relationship="Self.FK_Cita_Admin" FromRole="Admin" ToRole="Cita" />
+    <Property Name="AdminId" Type="Int16" Nullable="false" />
+    <Property Name="PersonaId" Type="Int16" Nullable="false" />
+    <Property Name="UsuarioId" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="Persona1" Relationship="PicadoDentalModel.FK_Admin_Persona1" FromRole="Admin" ToRole="Persona" />
+    <NavigationProperty Name="Usuario" Relationship="PicadoDentalModel.FK_Admin_Usuario" FromRole="Admin" ToRole="Usuario" />
   </EntityType>
   <EntityType Name="Cita">
     <Key>
       <PropertyRef Name="CitaID" />
+      <PropertyRef Name="CitaId" />
     </Key>
     <Property Name="CitaID" Type="Int16" Nullable="false" />
     <Property Name="ClienteID" Type="Int16" Nullable="false" />
     <Property Name="AdminID" Type="Int16" Nullable="false" />
     <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="Hora" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Comentarios" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Comentarios" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Admin" Relationship="Self.FK_Cita_Admin" FromRole="Cita" ToRole="Admin" />
     <NavigationProperty Name="Cliente" Relationship="Self.FK_Cita_Cliente" FromRole="Cita" ToRole="Cliente" />
+    <Property Name="CitaId" Type="Int16" Nullable="false" />
+    <Property Name="ClienteId" Type="Int16" Nullable="false" />
+    <Property Name="DoctorId" Type="Int16" Nullable="false" />
+    <Property Name="FechaHora" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="Cliente1" Relationship="PicadoDentalModel.FK_Cita_Cliente1" FromRole="Cita" ToRole="Cliente" />
+    <NavigationProperty Name="Doctor" Relationship="PicadoDentalModel.FK_Cita_Doctor" FromRole="Cita" ToRole="Doctor" />
   </EntityType>
   <EntityType Name="Cliente">
     <Key>
       <PropertyRef Name="ClienteID" />
+      <PropertyRef Name="ClienteId" />
     </Key>
     <Property Name="ClienteID" Type="Int16" Nullable="false" />
     <Property Name="PersonaID" Type="Int16" Nullable="false" />
     <NavigationProperty Name="Citas" Relationship="Self.FK_Cita_Cliente" FromRole="Cliente" ToRole="Cita" />
     <NavigationProperty Name="Persona" Relationship="Self.FK_Cliente_Persona" FromRole="Cliente" ToRole="Persona" />
+    <Property Name="ClienteId" Type="Int16" Nullable="false" />
+    <Property Name="PersonaId" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="Citas1" Relationship="PicadoDentalModel.FK_Cita_Cliente1" FromRole="Cliente" ToRole="Cita" />
+    <NavigationProperty Name="Persona1" Relationship="PicadoDentalModel.FK_Cliente_Persona1" FromRole="Cliente" ToRole="Persona" />
   </EntityType>
   <EntityType Name="Genero">
     <Key>
       <PropertyRef Name="GeneroID" />
+      <PropertyRef Name="GeneroId" />
     </Key>
     <Property Name="GeneroID" Type="Byte" Nullable="false" />
     <Property Name="DescGenero" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Personas" Relationship="Self.FK_Persona_Genero" FromRole="Genero" ToRole="Persona" />
+    <Property Name="GeneroId" Type="Int16" Nullable="false" />
+    <Property Name="Descipcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Personas1" Relationship="PicadoDentalModel.FK_Persona_Genero1" FromRole="Genero" ToRole="Persona" />
   </EntityType>
   <EntityType Name="Persona">
     <Key>
       <PropertyRef Name="PersonaID" />
+      <PropertyRef Name="PersonaId" />
     </Key>
     <Property Name="PersonaID" Type="Int16" Nullable="false" />
-    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="PrimerApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="SegundoApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PrimerApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SegundoApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="GeneroID" Type="Byte" Nullable="false" />
     <NavigationProperty Name="Admins" Relationship="Self.FK_Admin_Persona" FromRole="Persona" ToRole="Admin" />
     <NavigationProperty Name="Clientes" Relationship="Self.FK_Cliente_Persona" FromRole="Persona" ToRole="Cliente" />
     <NavigationProperty Name="Genero" Relationship="Self.FK_Persona_Genero" FromRole="Persona" ToRole="Genero" />
+    <Property Name="PersonaId" Type="Int16" Nullable="false" />
+    <Property Name="GeneroId" Type="Int16" />
+    <NavigationProperty Name="Admins1" Relationship="PicadoDentalModel.FK_Admin_Persona1" FromRole="Persona" ToRole="Admin" />
+    <NavigationProperty Name="Clientes1" Relationship="PicadoDentalModel.FK_Cliente_Persona1" FromRole="Persona" ToRole="Cliente" />
+    <NavigationProperty Name="Doctors" Relationship="PicadoDentalModel.FK_Doctor_Persona" FromRole="Persona" ToRole="Doctor" />
+    <NavigationProperty Name="Genero1" Relationship="PicadoDentalModel.FK_Persona_Genero1" FromRole="Persona" ToRole="Genero" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>
@@ -154,5 +183,158 @@
       <End Role="Genero" EntitySet="Generoes" />
       <End Role="Persona" EntitySet="Personas" />
     </AssociationSet>
+    <EntitySet Name="Doctors" EntityType="PicadoDentalModel.Doctor" />
+    <EntitySet Name="Usuarios" EntityType="PicadoDentalModel.Usuario" />
+    <AssociationSet Name="FK_Admin_Persona1" Association="PicadoDentalModel.FK_Admin_Persona1">
+      <End Role="Persona" EntitySet="Personas" />
+      <End Role="Admin" EntitySet="Admins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Admin_Usuario" Association="PicadoDentalModel.FK_Admin_Usuario">
+      <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="Admin" EntitySet="Admins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cita_Cliente1" Association="PicadoDentalModel.FK_Cita_Cliente1">
+      <End Role="Cliente" EntitySet="Clientes" />
+      <End Role="Cita" EntitySet="Citas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cita_Doctor" Association="PicadoDentalModel.FK_Cita_Doctor">
+      <End Role="Doctor" EntitySet="Doctors" />
+      <End Role="Cita" EntitySet="Citas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cliente_Persona1" Association="PicadoDentalModel.FK_Cliente_Persona1">
+      <End Role="Persona" EntitySet="Personas" />
+      <End Role="Cliente" EntitySet="Clientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Doctor_Persona" Association="PicadoDentalModel.FK_Doctor_Persona">
+      <End Role="Persona" EntitySet="Personas" />
+      <End Role="Doctor" EntitySet="Doctors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Doctor_Usuario" Association="PicadoDentalModel.FK_Doctor_Usuario">
+      <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="Doctor" EntitySet="Doctors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Persona_Genero1" Association="PicadoDentalModel.FK_Persona_Genero1">
+      <End Role="Genero" EntitySet="Generoes" />
+      <End Role="Persona" EntitySet="Personas" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Doctor">
+    <Key>
+      <PropertyRef Name="DoctorId" />
+    </Key>
+    <Property Name="DoctorId" Type="Int16" Nullable="false" />
+    <Property Name="PersonaId" Type="Int16" Nullable="false" />
+    <Property Name="UsuarioId" Type="Int16" Nullable="false" />
+    <Property Name="Especialidad" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Citas" Relationship="PicadoDentalModel.FK_Cita_Doctor" FromRole="Doctor" ToRole="Cita" />
+    <NavigationProperty Name="Persona" Relationship="PicadoDentalModel.FK_Doctor_Persona" FromRole="Doctor" ToRole="Persona" />
+    <NavigationProperty Name="Usuario" Relationship="PicadoDentalModel.FK_Doctor_Usuario" FromRole="Doctor" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="UsuarioId" />
+    </Key>
+    <Property Name="UsuarioId" Type="Int16" Nullable="false" />
+    <Property Name="PersonaId" Type="Int16" />
+    <Property Name="Usuario1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Contrasena" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Admins" Relationship="PicadoDentalModel.FK_Admin_Usuario" FromRole="Usuario" ToRole="Admin" />
+    <NavigationProperty Name="Doctors" Relationship="PicadoDentalModel.FK_Doctor_Usuario" FromRole="Usuario" ToRole="Doctor" />
+  </EntityType>
+  <Association Name="FK_Admin_Persona1">
+    <End Type="PicadoDentalModel.Persona" Role="Persona" Multiplicity="1" />
+    <End Type="PicadoDentalModel.Admin" Role="Admin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persona">
+        <PropertyRef Name="PersonaId" />
+      </Principal>
+      <Dependent Role="Admin">
+        <PropertyRef Name="PersonaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Admin_Usuario">
+    <End Type="PicadoDentalModel.Usuario" Role="Usuario" Multiplicity="1" />
+    <End Type="PicadoDentalModel.Admin" Role="Admin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="UsuarioId" />
+      </Principal>
+      <Dependent Role="Admin">
+        <PropertyRef Name="UsuarioId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cita_Cliente1">
+    <End Type="PicadoDentalModel.Cliente" Role="Cliente" Multiplicity="1" />
+    <End Type="PicadoDentalModel.Cita" Role="Cita" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="ClienteId" />
+      </Principal>
+      <Dependent Role="Cita">
+        <PropertyRef Name="ClienteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cita_Doctor">
+    <End Type="PicadoDentalModel.Doctor" Role="Doctor" Multiplicity="1" />
+    <End Type="PicadoDentalModel.Cita" Role="Cita" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Doctor">
+        <PropertyRef Name="DoctorId" />
+      </Principal>
+      <Dependent Role="Cita">
+        <PropertyRef Name="DoctorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cliente_Persona1">
+    <End Type="PicadoDentalModel.Persona" Role="Persona" Multiplicity="1" />
+    <End Type="PicadoDentalModel.Cliente" Role="Cliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persona">
+        <PropertyRef Name="PersonaId" />
+      </Principal>
+      <Dependent Role="Cliente">
+        <PropertyRef Name="PersonaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Doctor_Persona">
+    <End Type="PicadoDentalModel.Persona" Role="Persona" Multiplicity="1" />
+    <End Type="PicadoDentalModel.Doctor" Role="Doctor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persona">
+        <PropertyRef Name="PersonaId" />
+      </Principal>
+      <Dependent Role="Doctor">
+        <PropertyRef Name="PersonaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Doctor_Usuario">
+    <End Type="PicadoDentalModel.Usuario" Role="Usuario" Multiplicity="1" />
+    <End Type="PicadoDentalModel.Doctor" Role="Doctor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="UsuarioId" />
+      </Principal>
+      <Dependent Role="Doctor">
+        <PropertyRef Name="UsuarioId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Persona_Genero1">
+    <End Type="PicadoDentalModel.Genero" Role="Genero" Multiplicity="0..1" />
+    <End Type="PicadoDentalModel.Persona" Role="Persona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genero">
+        <PropertyRef Name="GeneroId" />
+      </Principal>
+      <Dependent Role="Persona">
+        <PropertyRef Name="GeneroId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

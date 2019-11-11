@@ -13,10 +13,10 @@ namespace PicadoDentalWS.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class PicadoDentalEntities : DbContext
+    public partial class PDEntities : DbContext
     {
-        public PicadoDentalEntities()
-            : base("name=PicadoDentalEntities")
+        public PDEntities()
+            : base("name=PDEntities")
         {
         }
     
@@ -28,8 +28,10 @@ namespace PicadoDentalWS.Models
         public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<Cita> Citas { get; set; }
         public virtual DbSet<Cliente> Clientes { get; set; }
+        public virtual DbSet<Doctor> Doctors { get; set; }
         public virtual DbSet<Genero> Generoes { get; set; }
         public virtual DbSet<Persona> Personas { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Usuario> Usuarios { get; set; }
     }
 }
