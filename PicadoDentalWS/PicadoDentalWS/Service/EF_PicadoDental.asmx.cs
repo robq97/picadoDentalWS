@@ -135,6 +135,14 @@ namespace PicadoDentalWS.Service
         //
         //
 
+        /// <summary>
+        /// no
+        /// </summary>
+        /// <param name="clienteId"></param>
+        /// <param name="doctorId"></param>
+        /// <param name="fechaHora"></param>
+        /// <param name="descripcion"></param>
+        /// <param name="comentarios"></param>
         [WebMethod]
         public void NewAppointment(short clienteId, short doctorId, DateTime fechaHora, string descripcion, string comentarios)
         {
@@ -151,8 +159,28 @@ namespace PicadoDentalWS.Service
                         Comentarios = comentarios
                     });
                     e.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+            }
+        }
 
+        [WebMethod]
+        public void ModifyAppointment(short citaId, short doctorId, DateTime fechaHora, string descripcion, string comentarios)
+        {
+            using (PDEntities e = new PDEntities())
+            {
+                try
+                {
+                    var cita = e.Citas.Where(s => s.CitaId == citaId).First();
 
+                    cita.DoctorId = doctorId;
+                    cita.FechaHora = fechaHora;
+                    cita.Descripcion = descripcion;
+                    cita.Comentarios = comentarios;
+                    e.SaveChanges();
                 }
                 catch (Exception)
                 {
@@ -161,15 +189,6 @@ namespace PicadoDentalWS.Service
 
             }
         }
-
-
-
-
-
-
-
-
-
 
 
     }
