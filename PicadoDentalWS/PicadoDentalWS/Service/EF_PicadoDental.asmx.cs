@@ -30,8 +30,13 @@ namespace PicadoDentalWS.Service
 
         short personaID;
 
+
+        /// <summary>
+        /// devuelve lista de clientes
+        /// </summary>
+        /// <returns>lista de clientes</returns>
         [WebMethod]
-        public List<Cliente> Read()
+        public List<Cliente> ClientList()
         {
             using (PDEntities e = new PDEntities())
             {
@@ -45,6 +50,16 @@ namespace PicadoDentalWS.Service
             return null;
         }
 
+
+        /// <summary>
+        /// Agrega nuevo cliente
+        /// </summary>
+        /// <param name="nombre"></param>
+        /// <param name="primerApellido"></param>
+        /// <param name="segundoApellido"></param>
+        /// <param name="telefono"></param>
+        /// <param name="correo"></param>
+        /// <param name="generoID"></param>
         [WebMethod]
         public void NewClient(string nombre, string primerApellido, string segundoApellido, string telefono, string correo, byte generoID)
         {
@@ -67,8 +82,6 @@ namespace PicadoDentalWS.Service
                         PersonaId = personaID
                     });
                     e.SaveChanges();
-
-
                 }
                 catch (Exception)
                 {
@@ -78,29 +91,36 @@ namespace PicadoDentalWS.Service
             }
         }
 
-        [WebMethod]
-        public void DeleteClient(short personaID)
-        {
-            using (PDEntities e = new PDEntities())
-            {
-                try
-                {
-                    var client = new Persona { PersonaId = personaID };
-                    e.Personas.Attach(client);
-                    e.Personas.Remove(client);
-                    var person = new Cliente { PersonaId = personaID };
-                    e.Clientes.Attach(person);
-                    e.Clientes.Remove(person);
-                    e.SaveChanges();
-                }
-                catch (Exception)
-                {
-                    return;
-                }
+        //[WebMethod]
+        //public void DeleteClient(short personaID)
+        //{
+        //    using (PDEntities e = new PDEntities())
+        //    {
+        //        try
+        //        {
+        //            var client = new Persona { PersonaId = personaID };
+        //            e.Personas.Attach(client);
+        //            e.Personas.Remove(client);
+        //            var person = new Cliente { PersonaId = personaID };
+        //            e.Clientes.Attach(person);
+        //            e.Clientes.Remove(person);
+        //            e.SaveChanges();
+        //        }
+        //        catch (Exception)
+        //        {
+        //            return;
+        //        }
+        //    }
+        //}
 
-            }
-        }
 
+        /// <summary>
+        /// Modifica datos de cliente
+        /// </summary>
+        /// <param name="personaId"></param>
+        /// <param name="telefono"></param>
+        /// <param name="correo"></param>
+        /// <param name="generoID"></param>
         [WebMethod]
         public void ModifyClient(short personaId, string telefono, string correo, byte generoID)
         {
@@ -121,6 +141,7 @@ namespace PicadoDentalWS.Service
 
             }
         }
+
         //
         //
         //
@@ -135,8 +156,9 @@ namespace PicadoDentalWS.Service
         //
         //
 
+
         /// <summary>
-        /// no
+        /// Crea nueva cita
         /// </summary>
         /// <param name="clienteId"></param>
         /// <param name="doctorId"></param>
@@ -167,6 +189,14 @@ namespace PicadoDentalWS.Service
             }
         }
 
+        /// <summary>
+        /// Modifica las citas
+        /// </summary>
+        /// <param name="citaId"></param>
+        /// <param name="doctorId"></param>
+        /// <param name="fechaHora"></param>
+        /// <param name="descripcion"></param>
+        /// <param name="comentarios"></param>
         [WebMethod]
         public void ModifyAppointment(short citaId, short doctorId, DateTime fechaHora, string descripcion, string comentarios)
         {
@@ -175,7 +205,6 @@ namespace PicadoDentalWS.Service
                 try
                 {
                     var cita = e.Citas.Where(s => s.CitaId == citaId).First();
-
                     cita.DoctorId = doctorId;
                     cita.FechaHora = fechaHora;
                     cita.Descripcion = descripcion;
@@ -189,7 +218,5 @@ namespace PicadoDentalWS.Service
 
             }
         }
-
-
     }
 }
