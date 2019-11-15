@@ -1,5 +1,4 @@
 ﻿using PicadoDentalWS.Models;
-using PicadoDentalWS.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -168,8 +167,14 @@ namespace PicadoDentalWS.Service
                                 where u.PersonaID == personaId
                                 select u
                                 ).SingleOrDefault();
-                    user.Contacto.Correo = correo;
-                    user.Contacto.Telefono = telefono;
+                    if (correo != null)
+                    {
+                        user.Contacto.Correo = correo;
+                    }
+                    if (telefono != null)
+                    {
+                        user.Contacto.Telefono = telefono;
+                    }
                     e.SaveChanges();
                 }
                 catch (Exception)
@@ -180,21 +185,7 @@ namespace PicadoDentalWS.Service
             }
         }
 
-
-
-
-
-
-
         //Citas
-
-
-
-
-
-
-
-
         /// <summary>
         /// Crea nueva cita
         /// </summary>
@@ -203,29 +194,29 @@ namespace PicadoDentalWS.Service
         /// <param name = "fechaHora" ></ param >
         /// < param name="descripcion"></param>
         /// <param name = "comentarios" ></ param >
-        //[WebMethod]
-        //public void NewAppointment(short clienteId, short doctorId, DateTime fechaHora, string descripcion, string comentarios)
-        //{
-        //    using (PDEntities e = new PDEntities())
-        //    {
-        //        try
-        //        {
-        //            e.Citas.Add(new Cita()
-        //            {
-        //                ClienteId = clienteId,
-        //                DoctorId = doctorId,
-        //                FechaHora = DateTime.Now,
-        //                Descripcion = descripcion,
-        //                Comentarios = comentarios
-        //            });
-        //            e.SaveChanges();
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            Console.WriteLine(ex);
-        //        }
-        //    }
-        //}
+        [WebMethod]
+        public void NewAppointment(int clienteId, int doctorId, string fechaHora, string descripcion, string comentarios)
+        {
+            using (PD_Entities e = new PD_Entities())
+            {
+                try
+                {
+                    e.Citas.Add(new Cita()
+                    {
+                        ClienteID = clienteId,
+                        PersonaID = doctorId,
+                        FechaHora = DateTime.Parse(fechaHora),
+                        DescCita = descripcion,
+                        Comentarios = comentarios
+                    });
+                    e.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+            }
+        }
 
         /// <summary>
         /// Modifica las citas
@@ -235,29 +226,41 @@ namespace PicadoDentalWS.Service
         /// <param name = "fechaHora" ></ param >
         /// < param name="descripcion"></param>
         /// <param name = "comentarios" ></ param >
-        //[WebMethod]
-        //public void ModifyAppointment(short citaId, short doctorId, DateTime fechaHora, string descripcion, string comentarios)
-        //{
-        //    using (PDEntities e = new PDEntities())
-        //    {
-        //        try
-        //        {
+        [WebMethod]
+        public void ModifyAppointment(int citaId, string doctorId, string fechaHora, string descripcion, string comentarios)
+        {
+            using (PD_Entities e = new PD_Entities())
+            {
+                try
+                {
+                    int personIdInt = Convert.ToInt32(doctorId);
 
+                    var cita = e.Citas.Where(s => s.CitaID == citaId).First();
+                    if (doctorId != null)
+                    {
+                        cita.PersonaID = personIdInt;
+                    }
+                    if (fechaHora != null)
+                    {
+                        cita.FechaHora = DateTime.Parse(fechaHora);
+                    }
+                    if (descripcion != null)
+                    {
+                        cita.DescCita = descripcion;
+                    }
+                    if (comentarios!= null)
+                    {
+                        cita.Comentarios = comentarios;
+                    }
+          
+                    e.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    return;
+                }
 
-
-        //            var cita = e.Citas.Where(s => s.CitaId == citaId).First();
-        //            cita.DoctorId = doctorId;
-        //            cita.FechaHora = fechaHora;
-        //            cita.Descripcion = descripcion;
-        //            cita.Comentarios = comentarios;
-        //            e.SaveChanges();
-        //        }
-        //        catch (Exception)
-        //        {
-        //            return;
-        //        }
-
-        //    }
-        //}
+            }
+        }
     }
 }
