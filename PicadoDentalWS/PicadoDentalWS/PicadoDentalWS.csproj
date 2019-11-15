@@ -133,7 +133,6 @@
       <DependentUpon>EF_PicadoDental.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ViewModels\ClienteViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Models\PDEntities.edmx">
