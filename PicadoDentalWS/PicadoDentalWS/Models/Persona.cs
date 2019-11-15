@@ -17,7 +17,7 @@ namespace PicadoDentalWS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Persona()
         {
-            this.Clientes = new HashSet<Cliente>();
+            this.Clientes = new List<Cliente>();
         }
     
         public int PersonaID { get; set; }
@@ -30,7 +30,7 @@ namespace PicadoDentalWS.Models
         public int ContactoID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cliente> Clientes { get; set; }
+        public virtual List<Cliente> Clientes { get; set; }
         public virtual Contacto Contacto { get; set; }
         public virtual Credencial Credencial { get; set; }
         public virtual Genero Genero { get; set; }

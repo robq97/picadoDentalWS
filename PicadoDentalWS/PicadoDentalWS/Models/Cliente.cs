@@ -17,14 +17,14 @@ namespace PicadoDentalWS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Cliente()
         {
-            this.Citas = new HashSet<Cita>();
+            this.Citas = new List<Cita>();
         }
     
         public int ClienteID { get; set; }
         public int PersonaID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cita> Citas { get; set; }
+        public virtual List<Cita> Citas { get; set; }
         public virtual Persona Persona { get; set; }
     }
 }
