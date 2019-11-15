@@ -23,31 +23,39 @@ namespace PicadoDentalWS.Service
         short personaID;
 
         [WebMethod]
-        public Boolean LogIn(string usuario, string contrasena)
+        public string[] LogIn(string usuario, string contrasena)
         {
-            using (PDEntities e = new PDEntities())
-            {
-                try
-                {
-                    var myUser = e.Usuarios
-                    .FirstOrDefault(u => u.Usuario1 == usuario
-                     && u.Contrasena == contrasena);
+            string[] info = new string[2];
 
-                    if (myUser != null)  
-                    {
-                        return true;
-                    }
-                    else    
-                    {
-                        return false;
-                    }
-                }
-                catch (Exception)
+            try
+            {
+                using (PD_Entities e = new PD_Entities())
                 {
-                    return false;
+                    var user = (from u in e.Personas
+                                join Credencial in e.Credencials on u.CredencialID equals Credencial.CredencialID
+                                where u.Credencial.Usuario == usuario && u.Credencial.Password == contrasena
+                                select new
+                                {
+                                    u.TipoCuentaID,
+                                    u.Credencial.Usuario
+                                }).ToList();
+
+                    if (user.FirstOrDefault() != null)
+                    {
+                        info[0] = user.FirstOrDefault().Usuario.ToString();
+                        info[1] = user.FirstOrDefault().TipoCuentaID.ToString();
+                        return info;
+                    }
                 }
             }
+            catch (Exception)
+            {
+                info[2] = "error";
+                return info;
+            }
+            return info;
         }
+
 
         /// <summary>
         /// devuelve lista de clientes

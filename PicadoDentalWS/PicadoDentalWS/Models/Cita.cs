@@ -14,14 +14,13 @@ namespace PicadoDentalWS.Models
     
     public partial class Cita
     {
-        public short CitaId { get; set; }
-        public short ClienteId { get; set; }
-        public short DoctorId { get; set; }
-        public System.DateTime? FechaHora { get; set; }
-        public string Descripcion { get; set; }
+        public int CitaID { get; set; }
+        public int ClienteID { get; set; }
+        public int PersonaID { get; set; }
+        public System.DateTime FechaHora { get; set; }
+        public string DescCita { get; set; }
         public string Comentarios { get; set; }
     
         public virtual Cliente Cliente { get; set; }
-        public virtual Doctor Doctor { get; set; }
     }
 }

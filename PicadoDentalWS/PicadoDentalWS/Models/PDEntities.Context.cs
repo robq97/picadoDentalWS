@@ -13,10 +13,10 @@ namespace PicadoDentalWS.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class PDEntities : DbContext
+    public partial class PD_Entities : DbContext
     {
-        public PDEntities()
-            : base("name=PDEntities")
+        public PD_Entities()
+            : base("name=PD_Entities")
         {
         }
     
@@ -25,13 +25,13 @@ namespace PicadoDentalWS.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<Cita> Citas { get; set; }
         public virtual DbSet<Cliente> Clientes { get; set; }
-        public virtual DbSet<Doctor> Doctors { get; set; }
+        public virtual DbSet<Contacto> Contactoes { get; set; }
+        public virtual DbSet<Credencial> Credencials { get; set; }
         public virtual DbSet<Genero> Generoes { get; set; }
         public virtual DbSet<Persona> Personas { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<Usuario> Usuarios { get; set; }
+        public virtual DbSet<TipoCuenta> TipoCuentas { get; set; }
     }
 }

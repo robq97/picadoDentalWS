@@ -1,68 +1,68 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="PDModelStoreContainer" CdmEntityContainer="PDEntities">
-    <EntitySetMapping Name="Admins">
-      <EntityTypeMapping TypeName="PDModel.Admin">
-        <MappingFragment StoreEntitySet="Admin">
-          <ScalarProperty Name="AdminId" ColumnName="AdminId" />
-          <ScalarProperty Name="PersonaId" ColumnName="PersonaId" />
-          <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
+  <EntityContainerMapping StorageEntityContainer="PDEntitiesStoreContainer" CdmEntityContainer="PD_Entities">
     <EntitySetMapping Name="Citas">
-      <EntityTypeMapping TypeName="PDModel.Cita">
+      <EntityTypeMapping TypeName="PDEntities.Cita">
         <MappingFragment StoreEntitySet="Cita">
-          <ScalarProperty Name="CitaId" ColumnName="CitaId" />
-          <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
-          <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+          <ScalarProperty Name="CitaID" ColumnName="CitaID" />
+          <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
           <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="DescCita" ColumnName="DescCita" />
           <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Clientes">
-      <EntityTypeMapping TypeName="PDModel.Cliente">
+      <EntityTypeMapping TypeName="PDEntities.Cliente">
         <MappingFragment StoreEntitySet="Cliente">
-          <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
-          <ScalarProperty Name="PersonaId" ColumnName="PersonaId" />
+          <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Doctors">
-      <EntityTypeMapping TypeName="PDModel.Doctor">
-        <MappingFragment StoreEntitySet="Doctor">
-          <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
-          <ScalarProperty Name="PersonaId" ColumnName="PersonaId" />
-          <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
-          <ScalarProperty Name="Especialidad" ColumnName="Especialidad" />
+    <EntitySetMapping Name="Contactoes">
+      <EntityTypeMapping TypeName="PDEntities.Contacto">
+        <MappingFragment StoreEntitySet="Contacto">
+          <ScalarProperty Name="ContactoID" ColumnName="ContactoID" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Credencials">
+      <EntityTypeMapping TypeName="PDEntities.Credencial">
+        <MappingFragment StoreEntitySet="Credencial">
+          <ScalarProperty Name="CredencialID" ColumnName="CredencialID" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Generoes">
-      <EntityTypeMapping TypeName="PDModel.Genero">
+      <EntityTypeMapping TypeName="PDEntities.Genero">
         <MappingFragment StoreEntitySet="Genero">
-          <ScalarProperty Name="GeneroId" ColumnName="GeneroId" />
-          <ScalarProperty Name="Descipcion" ColumnName="Descipcion" />
+          <ScalarProperty Name="GeneroID" ColumnName="GeneroID" />
+          <ScalarProperty Name="DescGenero" ColumnName="DescGenero" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Personas">
-      <EntityTypeMapping TypeName="PDModel.Persona">
+      <EntityTypeMapping TypeName="PDEntities.Persona">
         <MappingFragment StoreEntitySet="Persona">
-          <ScalarProperty Name="PersonaId" ColumnName="PersonaId" />
+          <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
           <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
-          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-          <ScalarProperty Name="Correo" ColumnName="Correo" />
-          <ScalarProperty Name="GeneroId" ColumnName="GeneroId" />
+          <ScalarProperty Name="GeneroID" ColumnName="GeneroID" />
+          <ScalarProperty Name="CredencialID" ColumnName="CredencialID" />
+          <ScalarProperty Name="TipoCuentaID" ColumnName="TipoCuentaID" />
+          <ScalarProperty Name="ContactoID" ColumnName="ContactoID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="PDModel.sysdiagram">
+      <EntityTypeMapping TypeName="PDEntities.sysdiagram">
         <MappingFragment StoreEntitySet="sysdiagrams">
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -72,13 +72,11 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Usuarios">
-      <EntityTypeMapping TypeName="PDModel.Usuario">
-        <MappingFragment StoreEntitySet="Usuario">
-          <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
-          <ScalarProperty Name="PersonaId" ColumnName="PersonaId" />
-          <ScalarProperty Name="Usuario1" ColumnName="Usuario" />
-          <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+    <EntitySetMapping Name="TipoCuentas">
+      <EntityTypeMapping TypeName="PDEntities.TipoCuenta">
+        <MappingFragment StoreEntitySet="TipoCuenta">
+          <ScalarProperty Name="TipoCuentaID" ColumnName="TipoCuentaID" />
+          <ScalarProperty Name="DescTipoCuenta" ColumnName="DescTipoCuenta" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

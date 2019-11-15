@@ -12,16 +12,17 @@ namespace PicadoDentalWS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Genero
+    public partial class Contacto
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Genero()
+        public Contacto()
         {
             this.Personas = new HashSet<Persona>();
         }
     
-        public int GeneroID { get; set; }
-        public string DescGenero { get; set; }
+        public int ContactoID { get; set; }
+        public string Telefono { get; set; }
+        public string Correo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Persona> Personas { get; set; }

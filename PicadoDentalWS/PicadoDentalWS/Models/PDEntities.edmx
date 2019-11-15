@@ -4,60 +4,60 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="PDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Admin">
-          <Key>
-            <PropertyRef Name="AdminId" />
-          </Key>
-          <Property Name="AdminId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PersonaId" Type="smallint" Nullable="false" />
-          <Property Name="UsuarioId" Type="smallint" Nullable="false" />
-        </EntityType>
+      <Schema Namespace="PDEntities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cita">
           <Key>
-            <PropertyRef Name="CitaId" />
+            <PropertyRef Name="CitaID" />
           </Key>
-          <Property Name="CitaId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ClienteId" Type="smallint" Nullable="false" />
-          <Property Name="DoctorId" Type="smallint" Nullable="false" />
-          <Property Name="FechaHora" Type="datetime" StoreGeneratedPattern="Computed" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
-          <Property Name="Comentarios" Type="varchar" MaxLength="50" />
+          <Property Name="CitaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClienteID" Type="int" Nullable="false" />
+          <Property Name="PersonaID" Type="int" Nullable="false" />
+          <Property Name="FechaHora" Type="datetime" Nullable="false" />
+          <Property Name="DescCita" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Comentarios" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="Cliente">
           <Key>
-            <PropertyRef Name="ClienteId" />
+            <PropertyRef Name="ClienteID" />
           </Key>
-          <Property Name="ClienteId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PersonaId" Type="smallint" Nullable="false" />
+          <Property Name="ClienteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonaID" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Doctor">
+        <EntityType Name="Contacto">
           <Key>
-            <PropertyRef Name="DoctorId" />
+            <PropertyRef Name="ContactoID" />
           </Key>
-          <Property Name="DoctorId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PersonaId" Type="smallint" Nullable="false" />
-          <Property Name="UsuarioId" Type="smallint" Nullable="false" />
-          <Property Name="Especialidad" Type="nchar" MaxLength="10" />
+          <Property Name="ContactoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Telefono" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Correo" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Credencial">
+          <Key>
+            <PropertyRef Name="CredencialID" />
+          </Key>
+          <Property Name="CredencialID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Usuario" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Genero">
           <Key>
-            <PropertyRef Name="GeneroId" />
+            <PropertyRef Name="GeneroID" />
           </Key>
-          <Property Name="GeneroId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Descipcion" Type="varchar" MaxLength="50" />
+          <Property Name="GeneroID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DescGenero" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Persona">
           <Key>
-            <PropertyRef Name="PersonaId" />
+            <PropertyRef Name="PersonaID" />
           </Key>
-          <Property Name="PersonaId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre" Type="varchar" MaxLength="50" />
-          <Property Name="PrimerApellido" Type="varchar" MaxLength="50" />
-          <Property Name="SegundoApellido" Type="varchar" MaxLength="50" />
-          <Property Name="Telefono" Type="varchar" MaxLength="50" />
-          <Property Name="Correo" Type="varchar" MaxLength="50" />
-          <Property Name="GeneroId" Type="smallint" />
+          <Property Name="PersonaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PrimerApellido" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SegundoApellido" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GeneroID" Type="int" Nullable="false" />
+          <Property Name="CredencialID" Type="int" />
+          <Property Name="TipoCuentaID" Type="int" Nullable="false" />
+          <Property Name="ContactoID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -69,60 +69,22 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <EntityType Name="Usuario">
+        <EntityType Name="TipoCuenta">
           <Key>
-            <PropertyRef Name="UsuarioId" />
+            <PropertyRef Name="TipoCuentaID" />
           </Key>
-          <Property Name="UsuarioId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PersonaId" Type="smallint" />
-          <Property Name="Usuario" Type="nchar" MaxLength="10" />
-          <Property Name="Contrasena" Type="nchar" MaxLength="10" />
+          <Property Name="TipoCuentaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DescTipoCuenta" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK_Admin_Persona">
-          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
-          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Persona">
-              <PropertyRef Name="PersonaId" />
-            </Principal>
-            <Dependent Role="Admin">
-              <PropertyRef Name="PersonaId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Admin_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="UsuarioId" />
-            </Principal>
-            <Dependent Role="Admin">
-              <PropertyRef Name="UsuarioId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Cita_Cliente">
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
           <End Role="Cita" Type="Self.Cita" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Cliente">
-              <PropertyRef Name="ClienteId" />
+              <PropertyRef Name="ClienteID" />
             </Principal>
             <Dependent Role="Cita">
-              <PropertyRef Name="ClienteId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Cita_Doctor">
-          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
-          <End Role="Cita" Type="Self.Cita" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Doctor">
-              <PropertyRef Name="DoctorId" />
-            </Principal>
-            <Dependent Role="Cita">
-              <PropertyRef Name="DoctorId" />
+              <PropertyRef Name="ClienteID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -131,162 +93,164 @@
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Persona">
-              <PropertyRef Name="PersonaId" />
+              <PropertyRef Name="PersonaID" />
             </Principal>
             <Dependent Role="Cliente">
-              <PropertyRef Name="PersonaId" />
+              <PropertyRef Name="PersonaID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Doctor_Persona">
-          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
-          <End Role="Doctor" Type="Self.Doctor" Multiplicity="*" />
+        <Association Name="FK_Persona_Contacto">
+          <End Role="Contacto" Type="Self.Contacto" Multiplicity="1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Persona">
-              <PropertyRef Name="PersonaId" />
+            <Principal Role="Contacto">
+              <PropertyRef Name="ContactoID" />
             </Principal>
-            <Dependent Role="Doctor">
-              <PropertyRef Name="PersonaId" />
+            <Dependent Role="Persona">
+              <PropertyRef Name="ContactoID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Doctor_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Doctor" Type="Self.Doctor" Multiplicity="*" />
+        <Association Name="FK_Persona_Credencial">
+          <End Role="Credencial" Type="Self.Credencial" Multiplicity="0..1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="UsuarioId" />
+            <Principal Role="Credencial">
+              <PropertyRef Name="CredencialID" />
             </Principal>
-            <Dependent Role="Doctor">
-              <PropertyRef Name="UsuarioId" />
+            <Dependent Role="Persona">
+              <PropertyRef Name="CredencialID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Persona_Genero">
-          <End Role="Genero" Type="Self.Genero" Multiplicity="0..1" />
+          <End Role="Genero" Type="Self.Genero" Multiplicity="1" />
           <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Genero">
-              <PropertyRef Name="GeneroId" />
+              <PropertyRef Name="GeneroID" />
             </Principal>
             <Dependent Role="Persona">
-              <PropertyRef Name="GeneroId" />
+              <PropertyRef Name="GeneroID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="PDModelStoreContainer">
-          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+        <Association Name="FK_Persona_TipoCuenta">
+          <End Role="TipoCuenta" Type="Self.TipoCuenta" Multiplicity="1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCuenta">
+              <PropertyRef Name="TipoCuentaID" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="TipoCuentaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PDEntitiesStoreContainer">
           <EntitySet Name="Cita" EntityType="Self.Cita" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Doctor" EntityType="Self.Doctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contacto" EntityType="Self.Contacto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Credencial" EntityType="Self.Credencial" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Genero" EntityType="Self.Genero" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Admin_Persona" Association="Self.FK_Admin_Persona">
-            <End Role="Persona" EntitySet="Persona" />
-            <End Role="Admin" EntitySet="Admin" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Admin_Usuario" Association="Self.FK_Admin_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Admin" EntitySet="Admin" />
-          </AssociationSet>
+          <EntitySet Name="TipoCuenta" EntityType="Self.TipoCuenta" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Cita_Cliente" Association="Self.FK_Cita_Cliente">
             <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="Cita" EntitySet="Cita" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cita_Doctor" Association="Self.FK_Cita_Doctor">
-            <End Role="Doctor" EntitySet="Doctor" />
             <End Role="Cita" EntitySet="Cita" />
           </AssociationSet>
           <AssociationSet Name="FK_Cliente_Persona" Association="Self.FK_Cliente_Persona">
             <End Role="Persona" EntitySet="Persona" />
             <End Role="Cliente" EntitySet="Cliente" />
           </AssociationSet>
-          <AssociationSet Name="FK_Doctor_Persona" Association="Self.FK_Doctor_Persona">
+          <AssociationSet Name="FK_Persona_Contacto" Association="Self.FK_Persona_Contacto">
+            <End Role="Contacto" EntitySet="Contacto" />
             <End Role="Persona" EntitySet="Persona" />
-            <End Role="Doctor" EntitySet="Doctor" />
           </AssociationSet>
-          <AssociationSet Name="FK_Doctor_Usuario" Association="Self.FK_Doctor_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Doctor" EntitySet="Doctor" />
+          <AssociationSet Name="FK_Persona_Credencial" Association="Self.FK_Persona_Credencial">
+            <End Role="Credencial" EntitySet="Credencial" />
+            <End Role="Persona" EntitySet="Persona" />
           </AssociationSet>
           <AssociationSet Name="FK_Persona_Genero" Association="Self.FK_Persona_Genero">
             <End Role="Genero" EntitySet="Genero" />
             <End Role="Persona" EntitySet="Persona" />
           </AssociationSet>
+          <AssociationSet Name="FK_Persona_TipoCuenta" Association="Self.FK_Persona_TipoCuenta">
+            <End Role="TipoCuenta" EntitySet="TipoCuenta" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="PDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Admin">
-          <Key>
-            <PropertyRef Name="AdminId" />
-          </Key>
-          <Property Name="AdminId" Type="Int16" Nullable="false" />
-          <Property Name="PersonaId" Type="Int16" Nullable="false" />
-          <Property Name="UsuarioId" Type="Int16" Nullable="false" />
-          <NavigationProperty Name="Persona" Relationship="Self.FK_Admin_Persona" FromRole="Admin" ToRole="Persona" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK_Admin_Usuario" FromRole="Admin" ToRole="Usuario" />
-        </EntityType>
+      <Schema Namespace="PDEntities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Cita">
           <Key>
-            <PropertyRef Name="CitaId" />
+            <PropertyRef Name="CitaID" />
           </Key>
-          <Property Name="CitaId" Type="Int16" Nullable="false" />
-          <Property Name="ClienteId" Type="Int16" Nullable="false" />
-          <Property Name="DoctorId" Type="Int16" Nullable="false" />
-          <Property Name="FechaHora" Type="DateTime" annotation:StoreGeneratedPattern="Computed" Precision="3" Nullable="true" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Comentarios" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CitaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClienteID" Type="Int32" Nullable="false" />
+          <Property Name="PersonaID" Type="Int32" Nullable="false" />
+          <Property Name="FechaHora" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DescCita" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Comentarios" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Cliente" Relationship="Self.FK_Cita_Cliente" FromRole="Cita" ToRole="Cliente" />
-          <NavigationProperty Name="Doctor" Relationship="Self.FK_Cita_Doctor" FromRole="Cita" ToRole="Doctor" />
         </EntityType>
         <EntityType Name="Cliente">
           <Key>
-            <PropertyRef Name="ClienteId" />
+            <PropertyRef Name="ClienteID" />
           </Key>
-          <Property Name="ClienteId" Type="Int16" Nullable="false" />
-          <Property Name="PersonaId" Type="Int16" Nullable="false" />
+          <Property Name="ClienteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonaID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Citas" Relationship="Self.FK_Cita_Cliente" FromRole="Cliente" ToRole="Cita" />
           <NavigationProperty Name="Persona" Relationship="Self.FK_Cliente_Persona" FromRole="Cliente" ToRole="Persona" />
         </EntityType>
-        <EntityType Name="Doctor">
+        <EntityType Name="Contacto">
           <Key>
-            <PropertyRef Name="DoctorId" />
+            <PropertyRef Name="ContactoID" />
           </Key>
-          <Property Name="DoctorId" Type="Int16" Nullable="false" />
-          <Property Name="PersonaId" Type="Int16" Nullable="false" />
-          <Property Name="UsuarioId" Type="Int16" Nullable="false" />
-          <Property Name="Especialidad" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Citas" Relationship="Self.FK_Cita_Doctor" FromRole="Doctor" ToRole="Cita" />
-          <NavigationProperty Name="Persona" Relationship="Self.FK_Doctor_Persona" FromRole="Doctor" ToRole="Persona" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK_Doctor_Usuario" FromRole="Doctor" ToRole="Usuario" />
+          <Property Name="ContactoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Personas" Relationship="Self.FK_Persona_Contacto" FromRole="Contacto" ToRole="Persona" />
+        </EntityType>
+        <EntityType Name="Credencial">
+          <Key>
+            <PropertyRef Name="CredencialID" />
+          </Key>
+          <Property Name="CredencialID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Personas" Relationship="Self.FK_Persona_Credencial" FromRole="Credencial" ToRole="Persona" />
         </EntityType>
         <EntityType Name="Genero">
           <Key>
-            <PropertyRef Name="GeneroId" />
+            <PropertyRef Name="GeneroID" />
           </Key>
-          <Property Name="GeneroId" Type="Int16" Nullable="false" />
-          <Property Name="Descipcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GeneroID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DescGenero" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Personas" Relationship="Self.FK_Persona_Genero" FromRole="Genero" ToRole="Persona" />
         </EntityType>
         <EntityType Name="Persona">
           <Key>
-            <PropertyRef Name="PersonaId" />
+            <PropertyRef Name="PersonaID" />
           </Key>
-          <Property Name="PersonaId" Type="Int16" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PrimerApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="SegundoApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="GeneroId" Type="Int16" />
-          <NavigationProperty Name="Admins" Relationship="Self.FK_Admin_Persona" FromRole="Persona" ToRole="Admin" />
+          <Property Name="PersonaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PrimerApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SegundoApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GeneroID" Type="Int32" Nullable="false" />
+          <Property Name="CredencialID" Type="Int32" />
+          <Property Name="TipoCuentaID" Type="Int32" Nullable="false" />
+          <Property Name="ContactoID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Clientes" Relationship="Self.FK_Cliente_Persona" FromRole="Persona" ToRole="Cliente" />
-          <NavigationProperty Name="Doctors" Relationship="Self.FK_Doctor_Persona" FromRole="Persona" ToRole="Doctor" />
+          <NavigationProperty Name="Contacto" Relationship="Self.FK_Persona_Contacto" FromRole="Persona" ToRole="Contacto" />
+          <NavigationProperty Name="Credencial" Relationship="Self.FK_Persona_Credencial" FromRole="Persona" ToRole="Credencial" />
           <NavigationProperty Name="Genero" Relationship="Self.FK_Persona_Genero" FromRole="Persona" ToRole="Genero" />
+          <NavigationProperty Name="TipoCuenta" Relationship="Self.FK_Persona_TipoCuenta" FromRole="Persona" ToRole="TipoCuenta" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -298,62 +262,23 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <EntityType Name="Usuario">
+        <EntityType Name="TipoCuenta">
           <Key>
-            <PropertyRef Name="UsuarioId" />
+            <PropertyRef Name="TipoCuentaID" />
           </Key>
-          <Property Name="UsuarioId" Type="Int16" Nullable="false" />
-          <Property Name="PersonaId" Type="Int16" />
-          <Property Name="Usuario1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Contrasena" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Admins" Relationship="Self.FK_Admin_Usuario" FromRole="Usuario" ToRole="Admin" />
-          <NavigationProperty Name="Doctors" Relationship="Self.FK_Doctor_Usuario" FromRole="Usuario" ToRole="Doctor" />
+          <Property Name="TipoCuentaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DescTipoCuenta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Personas" Relationship="Self.FK_Persona_TipoCuenta" FromRole="TipoCuenta" ToRole="Persona" />
         </EntityType>
-        <Association Name="FK_Admin_Persona">
-          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
-          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Persona">
-              <PropertyRef Name="PersonaId" />
-            </Principal>
-            <Dependent Role="Admin">
-              <PropertyRef Name="PersonaId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Admin_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="UsuarioId" />
-            </Principal>
-            <Dependent Role="Admin">
-              <PropertyRef Name="UsuarioId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Cita_Cliente">
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
           <End Role="Cita" Type="Self.Cita" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Cliente">
-              <PropertyRef Name="ClienteId" />
+              <PropertyRef Name="ClienteID" />
             </Principal>
             <Dependent Role="Cita">
-              <PropertyRef Name="ClienteId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Cita_Doctor">
-          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
-          <End Role="Cita" Type="Self.Cita" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Doctor">
-              <PropertyRef Name="DoctorId" />
-            </Principal>
-            <Dependent Role="Cita">
-              <PropertyRef Name="DoctorId" />
+              <PropertyRef Name="ClienteID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -362,88 +287,92 @@
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Persona">
-              <PropertyRef Name="PersonaId" />
+              <PropertyRef Name="PersonaID" />
             </Principal>
             <Dependent Role="Cliente">
-              <PropertyRef Name="PersonaId" />
+              <PropertyRef Name="PersonaID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Doctor_Persona">
-          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
-          <End Role="Doctor" Type="Self.Doctor" Multiplicity="*" />
+        <Association Name="FK_Persona_Contacto">
+          <End Role="Contacto" Type="Self.Contacto" Multiplicity="1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Persona">
-              <PropertyRef Name="PersonaId" />
+            <Principal Role="Contacto">
+              <PropertyRef Name="ContactoID" />
             </Principal>
-            <Dependent Role="Doctor">
-              <PropertyRef Name="PersonaId" />
+            <Dependent Role="Persona">
+              <PropertyRef Name="ContactoID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Doctor_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Doctor" Type="Self.Doctor" Multiplicity="*" />
+        <Association Name="FK_Persona_Credencial">
+          <End Role="Credencial" Type="Self.Credencial" Multiplicity="0..1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="UsuarioId" />
+            <Principal Role="Credencial">
+              <PropertyRef Name="CredencialID" />
             </Principal>
-            <Dependent Role="Doctor">
-              <PropertyRef Name="UsuarioId" />
+            <Dependent Role="Persona">
+              <PropertyRef Name="CredencialID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Persona_Genero">
-          <End Role="Genero" Type="Self.Genero" Multiplicity="0..1" />
+          <End Role="Genero" Type="Self.Genero" Multiplicity="1" />
           <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Genero">
-              <PropertyRef Name="GeneroId" />
+              <PropertyRef Name="GeneroID" />
             </Principal>
             <Dependent Role="Persona">
-              <PropertyRef Name="GeneroId" />
+              <PropertyRef Name="GeneroID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="PDEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Admins" EntityType="Self.Admin" />
+        <Association Name="FK_Persona_TipoCuenta">
+          <End Role="TipoCuenta" Type="Self.TipoCuenta" Multiplicity="1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCuenta">
+              <PropertyRef Name="TipoCuentaID" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="TipoCuentaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PD_Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Citas" EntityType="Self.Cita" />
           <EntitySet Name="Clientes" EntityType="Self.Cliente" />
-          <EntitySet Name="Doctors" EntityType="Self.Doctor" />
+          <EntitySet Name="Contactoes" EntityType="Self.Contacto" />
+          <EntitySet Name="Credencials" EntityType="Self.Credencial" />
           <EntitySet Name="Generoes" EntityType="Self.Genero" />
           <EntitySet Name="Personas" EntityType="Self.Persona" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
-          <AssociationSet Name="FK_Admin_Persona" Association="Self.FK_Admin_Persona">
-            <End Role="Persona" EntitySet="Personas" />
-            <End Role="Admin" EntitySet="Admins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Admin_Usuario" Association="Self.FK_Admin_Usuario">
-            <End Role="Usuario" EntitySet="Usuarios" />
-            <End Role="Admin" EntitySet="Admins" />
-          </AssociationSet>
+          <EntitySet Name="TipoCuentas" EntityType="Self.TipoCuenta" />
           <AssociationSet Name="FK_Cita_Cliente" Association="Self.FK_Cita_Cliente">
             <End Role="Cliente" EntitySet="Clientes" />
-            <End Role="Cita" EntitySet="Citas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cita_Doctor" Association="Self.FK_Cita_Doctor">
-            <End Role="Doctor" EntitySet="Doctors" />
             <End Role="Cita" EntitySet="Citas" />
           </AssociationSet>
           <AssociationSet Name="FK_Cliente_Persona" Association="Self.FK_Cliente_Persona">
             <End Role="Persona" EntitySet="Personas" />
             <End Role="Cliente" EntitySet="Clientes" />
           </AssociationSet>
-          <AssociationSet Name="FK_Doctor_Persona" Association="Self.FK_Doctor_Persona">
+          <AssociationSet Name="FK_Persona_Contacto" Association="Self.FK_Persona_Contacto">
+            <End Role="Contacto" EntitySet="Contactoes" />
             <End Role="Persona" EntitySet="Personas" />
-            <End Role="Doctor" EntitySet="Doctors" />
           </AssociationSet>
-          <AssociationSet Name="FK_Doctor_Usuario" Association="Self.FK_Doctor_Usuario">
-            <End Role="Usuario" EntitySet="Usuarios" />
-            <End Role="Doctor" EntitySet="Doctors" />
+          <AssociationSet Name="FK_Persona_Credencial" Association="Self.FK_Persona_Credencial">
+            <End Role="Credencial" EntitySet="Credencials" />
+            <End Role="Persona" EntitySet="Personas" />
           </AssociationSet>
           <AssociationSet Name="FK_Persona_Genero" Association="Self.FK_Persona_Genero">
             <End Role="Genero" EntitySet="Generoes" />
+            <End Role="Persona" EntitySet="Personas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persona_TipoCuenta" Association="Self.FK_Persona_TipoCuenta">
+            <End Role="TipoCuenta" EntitySet="TipoCuentas" />
             <End Role="Persona" EntitySet="Personas" />
           </AssociationSet>
         </EntityContainer>
@@ -452,69 +381,69 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="PDModelStoreContainer" CdmEntityContainer="PDEntities">
-          <EntitySetMapping Name="Admins">
-            <EntityTypeMapping TypeName="PDModel.Admin">
-              <MappingFragment StoreEntitySet="Admin">
-                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
-                <ScalarProperty Name="PersonaId" ColumnName="PersonaId" />
-                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+        <EntityContainerMapping StorageEntityContainer="PDEntitiesStoreContainer" CdmEntityContainer="PD_Entities">
           <EntitySetMapping Name="Citas">
-            <EntityTypeMapping TypeName="PDModel.Cita">
+            <EntityTypeMapping TypeName="PDEntities.Cita">
               <MappingFragment StoreEntitySet="Cita">
-                <ScalarProperty Name="CitaId" ColumnName="CitaId" />
-                <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
-                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="CitaID" ColumnName="CitaID" />
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+                <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
                 <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="DescCita" ColumnName="DescCita" />
                 <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Clientes">
-            <EntityTypeMapping TypeName="PDModel.Cliente">
+            <EntityTypeMapping TypeName="PDEntities.Cliente">
               <MappingFragment StoreEntitySet="Cliente">
-                <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
-                <ScalarProperty Name="PersonaId" ColumnName="PersonaId" />
+                <ScalarProperty Name="ClienteID" ColumnName="ClienteID" />
+                <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Doctors">
-            <EntityTypeMapping TypeName="PDModel.Doctor">
-              <MappingFragment StoreEntitySet="Doctor">
-                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
-                <ScalarProperty Name="PersonaId" ColumnName="PersonaId" />
-                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
-                <ScalarProperty Name="Especialidad" ColumnName="Especialidad" />
+          <EntitySetMapping Name="Contactoes">
+            <EntityTypeMapping TypeName="PDEntities.Contacto">
+              <MappingFragment StoreEntitySet="Contacto">
+                <ScalarProperty Name="ContactoID" ColumnName="ContactoID" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Credencials">
+            <EntityTypeMapping TypeName="PDEntities.Credencial">
+              <MappingFragment StoreEntitySet="Credencial">
+                <ScalarProperty Name="CredencialID" ColumnName="CredencialID" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Generoes">
-            <EntityTypeMapping TypeName="PDModel.Genero">
+            <EntityTypeMapping TypeName="PDEntities.Genero">
               <MappingFragment StoreEntitySet="Genero">
-                <ScalarProperty Name="GeneroId" ColumnName="GeneroId" />
-                <ScalarProperty Name="Descipcion" ColumnName="Descipcion" />
+                <ScalarProperty Name="GeneroID" ColumnName="GeneroID" />
+                <ScalarProperty Name="DescGenero" ColumnName="DescGenero" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Personas">
-            <EntityTypeMapping TypeName="PDModel.Persona">
+            <EntityTypeMapping TypeName="PDEntities.Persona">
               <MappingFragment StoreEntitySet="Persona">
-                <ScalarProperty Name="PersonaId" ColumnName="PersonaId" />
+                <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />
                 <ScalarProperty Name="SegundoApellido" ColumnName="SegundoApellido" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="Correo" ColumnName="Correo" />
-                <ScalarProperty Name="GeneroId" ColumnName="GeneroId" />
+                <ScalarProperty Name="GeneroID" ColumnName="GeneroID" />
+                <ScalarProperty Name="CredencialID" ColumnName="CredencialID" />
+                <ScalarProperty Name="TipoCuentaID" ColumnName="TipoCuentaID" />
+                <ScalarProperty Name="ContactoID" ColumnName="ContactoID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="PDModel.sysdiagram">
+            <EntityTypeMapping TypeName="PDEntities.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -524,13 +453,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Usuarios">
-            <EntityTypeMapping TypeName="PDModel.Usuario">
-              <MappingFragment StoreEntitySet="Usuario">
-                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
-                <ScalarProperty Name="PersonaId" ColumnName="PersonaId" />
-                <ScalarProperty Name="Usuario1" ColumnName="Usuario" />
-                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+          <EntitySetMapping Name="TipoCuentas">
+            <EntityTypeMapping TypeName="PDEntities.TipoCuenta">
+              <MappingFragment StoreEntitySet="TipoCuenta">
+                <ScalarProperty Name="TipoCuentaID" ColumnName="TipoCuentaID" />
+                <ScalarProperty Name="DescTipoCuenta" ColumnName="DescTipoCuenta" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
