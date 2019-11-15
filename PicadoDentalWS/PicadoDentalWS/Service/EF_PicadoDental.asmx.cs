@@ -157,16 +157,19 @@ namespace PicadoDentalWS.Service
         /// <param name = "correo" ></ param >
         /// < param name="generoID"></param>
         [WebMethod]
-        public void ModifyClient(short personaId, string telefono, string correo, byte generoID)
+        public void ModifyClient(int personaId, string telefono, string correo)
         {
-            using (PDEntities e = new PDEntities())
+            using (PD_Entities e = new PD_Entities())
             {
                 try
                 {
-                    var persona = e.Personas.Where(s => s.PersonaId == personaId).First();
-
-                    persona.Telefono = telefono;
-                    persona.Correo = correo;
+                    var user = (from u in e.Personas
+                                join Contacto in e.Contactoes on u.ContactoID equals Contacto.ContactoID
+                                where u.PersonaID == personaId
+                                select u
+                                ).SingleOrDefault();
+                    user.Contacto.Correo = correo;
+                    user.Contacto.Telefono = telefono;
                     e.SaveChanges();
                 }
                 catch (Exception)
