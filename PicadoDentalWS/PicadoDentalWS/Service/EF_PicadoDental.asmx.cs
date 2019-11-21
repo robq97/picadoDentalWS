@@ -1,9 +1,13 @@
 ﻿using PicadoDentalWS.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Services;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace PicadoDentalWS.Service
 {
@@ -58,19 +62,30 @@ namespace PicadoDentalWS.Service
         /// devuelve lista de clientes
         /// </summary>
         /// <returns>lista de clientes</returns>
+        public class ClientePOCO
+        {
+            public int ClienteID { get; set; }
+            public int PersonaID { get; set; }
+            public string Nombre { get; set; }
+
+            public ClientePOCO() {}
+        }
+
         [WebMethod]
-        public List<Cliente> ClientList()
+        public List<ClientePOCO> ClientList()
         {
             using (PD_Entities e = new PD_Entities())
             {
-                var userList = from Cliente in e.Clientes
-                               select Cliente;
-                if (userList.Count() != 0)
-                {
-                    return userList.ToList();
-                }
+                List<ClientePOCO> clientes = e.Clientes
+                    .Select(c => new ClientePOCO() {
+                        ClienteID = c.ClienteID,
+                        PersonaID = c.PersonaID,
+                        Nombre = c.Persona.Nombre
+                    })
+                    .ToList();
+
+                return clientes;
             }
-            return null;
         }
 
 
