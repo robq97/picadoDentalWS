@@ -121,6 +121,152 @@ namespace PicadoDentalWS.Service
             }
         }
 
+        /// <summary>
+        /// Agrega nuevo doctor
+        /// </summary>
+        /// <param name="nombre"></param>
+        /// <param name="primerApellido"></param>
+        /// <param name="segundoApellido"></param>
+        /// <param name="telefono"></param>
+        /// <param name="correo"></param>
+        /// <param name="generoID"></param>
+        [WebMethod]
+        public void NewDoctor(string nombre, string primerApellido, string segundoApellido, string telefono, string correo, int generoID)
+        {
+            using (PD_Entities e = new PD_Entities())
+            {
+                try
+                {
+                    int contactoID = 0;
+                    int personaID = 0;
+
+                    e.Contactoes.Add(new Contacto()
+                    {
+                        ContactoID = contactoID,
+                        Telefono = telefono,
+                        Correo = correo
+                    });
+                    e.Personas.Add(new Persona()
+                    {
+                        PersonaID = personaID,
+                        Nombre = nombre,
+                        PrimerApellido = primerApellido,
+                        SegundoApellido = segundoApellido,
+                        GeneroID = generoID,
+                        ContactoID = contactoID,
+                        TipoCuentaID = 3
+                    });
+                    e.Clientes.Add(new Cliente()
+                    {
+                        PersonaID = personaID
+                    });
+                    e.SaveChanges();
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Agrega nuevo admin
+        /// </summary>
+        /// <param name="nombre"></param>
+        /// <param name="primerApellido"></param>
+        /// <param name="segundoApellido"></param>
+        /// <param name="telefono"></param>
+        /// <param name="correo"></param>
+        /// <param name="generoID"></param>
+        [WebMethod]
+        public void NewAdmin(string nombre, string primerApellido, string segundoApellido, string telefono, string correo, int generoID)
+        {
+            using (PD_Entities e = new PD_Entities())
+            {
+                try
+                {
+                    int contactoID = 0;
+                    int personaID = 0;
+
+                    e.Contactoes.Add(new Contacto()
+                    {
+                        ContactoID = contactoID,
+                        Telefono = telefono,
+                        Correo = correo
+                    });
+                    e.Personas.Add(new Persona()
+                    {
+                        PersonaID = personaID,
+                        Nombre = nombre,
+                        PrimerApellido = primerApellido,
+                        SegundoApellido = segundoApellido,
+                        GeneroID = generoID,
+                        ContactoID = contactoID,
+                        TipoCuentaID = 1
+                    });
+                    e.Clientes.Add(new Cliente()
+                    {
+                        PersonaID = personaID
+                    });
+                    e.SaveChanges();
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Agrega nueva usuario/secretario
+        /// </summary>
+        /// <param name="nombre"></param>
+        /// <param name="primerApellido"></param>
+        /// <param name="segundoApellido"></param>
+        /// <param name="telefono"></param>
+        /// <param name="correo"></param>
+        /// <param name="generoID"></param>
+        [WebMethod]
+        public void NewSecretary(string nombre, string primerApellido, string segundoApellido, string telefono, string correo, int generoID)
+        {
+            using (PD_Entities e = new PD_Entities())
+            {
+                try
+                {
+                    int contactoID = 0;
+                    int personaID = 0;
+
+                    e.Contactoes.Add(new Contacto()
+                    {
+                        ContactoID = contactoID,
+                        Telefono = telefono,
+                        Correo = correo
+                    });
+                    e.Personas.Add(new Persona()
+                    {
+                        PersonaID = personaID,
+                        Nombre = nombre,
+                        PrimerApellido = primerApellido,
+                        SegundoApellido = segundoApellido,
+                        GeneroID = generoID,
+                        ContactoID = contactoID,
+                        TipoCuentaID = 2
+                    });
+                    e.Clientes.Add(new Cliente()
+                    {
+                        PersonaID = personaID
+                    });
+                    e.SaveChanges();
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+        }
+
         //[WebMethod]
         //public void DeleteClient(short personaID)
         //{
