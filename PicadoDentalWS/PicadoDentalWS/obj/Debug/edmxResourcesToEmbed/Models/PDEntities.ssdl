@@ -53,6 +53,7 @@
     <Property Name="CredencialID" Type="int" />
     <Property Name="TipoCuentaID" Type="int" Nullable="false" />
     <Property Name="ContactoID" Type="int" Nullable="false" />
+    <Property Name="Cedula" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>

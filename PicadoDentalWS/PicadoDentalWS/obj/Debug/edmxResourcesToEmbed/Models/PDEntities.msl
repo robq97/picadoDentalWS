@@ -50,6 +50,7 @@
     <EntitySetMapping Name="Personas">
       <EntityTypeMapping TypeName="PDEntities.Persona">
         <MappingFragment StoreEntitySet="Persona">
+          <ScalarProperty Name="Cedula" ColumnName="Cedula" />
           <ScalarProperty Name="PersonaID" ColumnName="PersonaID" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="PrimerApellido" ColumnName="PrimerApellido" />

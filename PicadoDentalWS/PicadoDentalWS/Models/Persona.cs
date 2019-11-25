@@ -28,6 +28,7 @@ namespace PicadoDentalWS.Models
         public Nullable<int> CredencialID { get; set; }
         public int TipoCuentaID { get; set; }
         public int ContactoID { get; set; }
+        public int Cedula { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual List<Cliente> Clientes { get; set; }

@@ -64,6 +64,7 @@
     <NavigationProperty Name="Credencial" Relationship="Self.FK_Persona_Credencial" FromRole="Persona" ToRole="Credencial" />
     <NavigationProperty Name="Genero" Relationship="Self.FK_Persona_Genero" FromRole="Persona" ToRole="Genero" />
     <NavigationProperty Name="TipoCuenta" Relationship="Self.FK_Persona_TipoCuenta" FromRole="Persona" ToRole="TipoCuenta" />
+    <Property Name="Cedula" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>

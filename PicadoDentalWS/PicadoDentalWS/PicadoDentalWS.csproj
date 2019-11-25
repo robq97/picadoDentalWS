@@ -133,6 +133,7 @@
       <DependentUpon>EF_PicadoDental.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="POCO Models\ClientePOCO.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Models\PDEntities.edmx">

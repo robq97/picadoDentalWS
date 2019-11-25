@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Services;
 using System.Xml;
 using System.Xml.Serialization;
+using PicadoDentalWS.POCOModels;
 
 namespace PicadoDentalWS.Service
 {
@@ -62,14 +63,6 @@ namespace PicadoDentalWS.Service
         /// devuelve lista de clientes
         /// </summary>
         /// <returns>lista de clientes</returns>
-        public class ClientePOCO
-        {
-            public int ClienteID { get; set; }
-            public int PersonaID { get; set; }
-            public string Nombre { get; set; }
-
-            public ClientePOCO() {}
-        }
 
         [WebMethod]
         public List<ClientePOCO> ClientList()
@@ -83,14 +76,12 @@ namespace PicadoDentalWS.Service
                         Nombre = c.Persona.Nombre
                     })
                     .ToList();
-
                 return clientes;
             }
         }
 
-
         /// <summary>
-        /// Agrega nuevo cliente
+        /// Agrega nueva persona
         /// </summary>
         /// <param name="nombre"></param>
         /// <param name="primerApellido"></param>
@@ -99,7 +90,7 @@ namespace PicadoDentalWS.Service
         /// <param name="correo"></param>
         /// <param name="generoID"></param>
         [WebMethod]
-        public void NewClient(string nombre, string primerApellido, string segundoApellido, string telefono, string correo, int generoID)
+        public void NewPerson(string nombre, string primerApellido, string segundoApellido, string telefono, string correo, int generoID, int cedula, int tipoCuentaID)
         {
             using (PD_Entities e = new PD_Entities())
             {
@@ -121,7 +112,8 @@ namespace PicadoDentalWS.Service
                         SegundoApellido = segundoApellido,
                         GeneroID = generoID,
                         ContactoID = contactoID,
-                        TipoCuentaID = 4
+                        Cedula = cedula,
+                        TipoCuentaID = tipoCuentaID
                     });
                     e.Clientes.Add(new Cliente()
                     {
@@ -135,179 +127,6 @@ namespace PicadoDentalWS.Service
                 }
             }
         }
-
-        /// <summary>
-        /// Agrega nuevo doctor
-        /// </summary>
-        /// <param name="nombre"></param>
-        /// <param name="primerApellido"></param>
-        /// <param name="segundoApellido"></param>
-        /// <param name="telefono"></param>
-        /// <param name="correo"></param>
-        /// <param name="generoID"></param>
-        [WebMethod]
-        public void NewDoctor(string nombre, string primerApellido, string segundoApellido, string telefono, string correo, int generoID)
-        {
-            using (PD_Entities e = new PD_Entities())
-            {
-                try
-                {
-                    int contactoID = 0;
-                    int personaID = 0;
-
-                    e.Contactoes.Add(new Contacto()
-                    {
-                        ContactoID = contactoID,
-                        Telefono = telefono,
-                        Correo = correo
-                    });
-                    e.Personas.Add(new Persona()
-                    {
-                        PersonaID = personaID,
-                        Nombre = nombre,
-                        PrimerApellido = primerApellido,
-                        SegundoApellido = segundoApellido,
-                        GeneroID = generoID,
-                        ContactoID = contactoID,
-                        TipoCuentaID = 3
-                    });
-                    e.Clientes.Add(new Cliente()
-                    {
-                        PersonaID = personaID
-                    });
-                    e.SaveChanges();
-                }
-                catch (Exception)
-                {
-
-                }
-            }
-        }
-
-
-        /// <summary>
-        /// Agrega nuevo admin
-        /// </summary>
-        /// <param name="nombre"></param>
-        /// <param name="primerApellido"></param>
-        /// <param name="segundoApellido"></param>
-        /// <param name="telefono"></param>
-        /// <param name="correo"></param>
-        /// <param name="generoID"></param>
-        [WebMethod]
-        public void NewAdmin(string nombre, string primerApellido, string segundoApellido, string telefono, string correo, int generoID)
-        {
-            using (PD_Entities e = new PD_Entities())
-            {
-                try
-                {
-                    int contactoID = 0;
-                    int personaID = 0;
-
-                    e.Contactoes.Add(new Contacto()
-                    {
-                        ContactoID = contactoID,
-                        Telefono = telefono,
-                        Correo = correo
-                    });
-                    e.Personas.Add(new Persona()
-                    {
-                        PersonaID = personaID,
-                        Nombre = nombre,
-                        PrimerApellido = primerApellido,
-                        SegundoApellido = segundoApellido,
-                        GeneroID = generoID,
-                        ContactoID = contactoID,
-                        TipoCuentaID = 1
-                    });
-                    e.Clientes.Add(new Cliente()
-                    {
-                        PersonaID = personaID
-                    });
-                    e.SaveChanges();
-                }
-                catch (Exception)
-                {
-
-                }
-            }
-        }
-
-
-        /// <summary>
-        /// Agrega nueva usuario/secretario
-        /// </summary>
-        /// <param name="nombre"></param>
-        /// <param name="primerApellido"></param>
-        /// <param name="segundoApellido"></param>
-        /// <param name="telefono"></param>
-        /// <param name="correo"></param>
-        /// <param name="generoID"></param>
-        [WebMethod]
-        public void NewSecretary(string nombre, string primerApellido, string segundoApellido, string telefono, string correo, int generoID)
-        {
-            using (PD_Entities e = new PD_Entities())
-            {
-                try
-                {
-                    int contactoID = 0;
-                    int personaID = 0;
-
-                    e.Contactoes.Add(new Contacto()
-                    {
-                        ContactoID = contactoID,
-                        Telefono = telefono,
-                        Correo = correo
-                    });
-                    e.Personas.Add(new Persona()
-                    {
-                        PersonaID = personaID,
-                        Nombre = nombre,
-                        PrimerApellido = primerApellido,
-                        SegundoApellido = segundoApellido,
-                        GeneroID = generoID,
-                        ContactoID = contactoID,
-                        TipoCuentaID = 2
-                    });
-                    e.Clientes.Add(new Cliente()
-                    {
-                        PersonaID = personaID
-                    });
-                    e.SaveChanges();
-                }
-                catch (Exception)
-                {
-
-                }
-            }
-        }
-
-        //[WebMethod]
-        //public void DeleteClient(short personaID)
-        //{
-        //    using (PD_Entities e = new PD_Entities())
-        //    {
-        //        try
-        //        {
-        //            var client = new Persona { PersonaID = personaID };
-        //            e.Personas.Attach(client);
-        //            e.Personas.Remove(client);
-
-        //            var person = new Cliente { PersonaID = personaID };
-        //            e.Clientes.Attach(person);
-        //            e.Clientes.Remove(person);
-
-        //            var 
-
-        //            e.SaveChanges();
-        //        }
-        //        catch (Exception)
-        //        {
-        //            return;
-        //        }
-        //    }
-        //}
-
 
         /// <summary>
         /// Modifica datos de cliente
@@ -342,7 +161,6 @@ namespace PicadoDentalWS.Service
                 {
                     return;
                 }
-
             }
         }
 
@@ -420,7 +238,6 @@ namespace PicadoDentalWS.Service
                 {
                     return;
                 }
-
             }
         }
     }
