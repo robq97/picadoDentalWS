@@ -82,7 +82,7 @@ namespace PicadoDentalWS.Service
         }
 
         /// <summary>
-        /// Agrega nueva persona
+        /// Crea nueva persona
         /// </summary>
         /// <param name="nombre"></param>
         /// <param name="primerApellido"></param>
@@ -90,8 +90,12 @@ namespace PicadoDentalWS.Service
         /// <param name="telefono"></param>
         /// <param name="correo"></param>
         /// <param name="generoID"></param>
+        /// <param name="cedula"></param>
+        /// <param name="tipoCuentaID"></param>
+        /// <param name="usuario"></param>
+        /// <param name="contrasena"></param>
         [WebMethod]
-        public void NewPerson(string nombre, string primerApellido, string segundoApellido, string telefono, string correo, int generoID, int cedula, int tipoCuentaID)
+        public void NewPerson(string nombre, string primerApellido, string segundoApellido, string telefono, string correo, int generoID, int cedula, int tipoCuentaID, string usuario, string contrasena)
         {
             using (PD_Entities e = new PD_Entities())
             {
@@ -100,7 +104,8 @@ namespace PicadoDentalWS.Service
                     int contactoID = 0;
                     int personaID = 0;
 
-                    e.Contactoes.Add(new Contacto(){
+                    e.Contactoes.Add(new Contacto()
+                    {
                         ContactoID = contactoID,
                         Telefono = telefono,
                         Correo = correo
@@ -120,11 +125,19 @@ namespace PicadoDentalWS.Service
                     {
                         PersonaID = personaID
                     });
+                    if (!usuario.Equals("") && !contrasena.Equals(""))
+                    {
+                        e.Credencials.Add(new Credencial()
+                        {
+                            Usuario = usuario,
+                            Password = contrasena
+                        });
+                    }
                     e.SaveChanges();
                 }
                 catch (Exception)
                 {
-                   
+
                 }
             }
         }
