@@ -193,14 +193,20 @@ namespace PicadoDentalWS.Service
             {
                 List<CitaPOCO> lista = (from c in e.Citas
                                         join s in e.Clientes
-                                           on c.ClienteID equals s.ClienteID into asd1
-                                        from s in asd1.DefaultIfEmpty()
+                                           on c.ClienteID equals s.ClienteID into InfoCliente
+                                        from s in InfoCliente.DefaultIfEmpty()
                                         join p in e.Personas
-                                            on s.PersonaID equals p.PersonaID into asd2
-                                        from p in asd2.DefaultIfEmpty()
+                                            on s.PersonaID equals p.PersonaID into InfoClientePersona
+                                        from p in InfoClientePersona.DefaultIfEmpty()
+                                        join g in e.Contactoes
+                                            on p.ContactoID equals g.ContactoID into InfoClientePersonaContacto
+                                        from g in InfoClientePersonaContacto.DefaultIfEmpty()
                                         join d in e.Personas
-                                            on c.PersonaID equals d.PersonaID into asd3
-                                        from d in asd3.DefaultIfEmpty()
+                                            on c.PersonaID equals d.PersonaID into InfoDoctor
+                                        from d in InfoDoctor.DefaultIfEmpty()
+                                        join y in e.Contactoes
+                                            on d.ContactoID equals y.ContactoID into InfoDoctorContacto
+                                        from y in InfoDoctorContacto.DefaultIfEmpty()
                                         select new CitaPOCO
                                         {
                                             Fecha = c.FechaHora,
@@ -208,7 +214,14 @@ namespace PicadoDentalWS.Service
                                             ClienteApellidos = p.PrimerApellido + " " + p.SegundoApellido,
                                             DoctorNombre = d.Nombre,
                                             DoctorApellidos = d.PrimerApellido + " " + d.SegundoApellido,
-                                            Detalles = c.DescCita
+                                            Detalles = c.DescCita,
+                                            ClienteID = c.ClienteID,
+                                            DoctorTelefono = y.Telefono,
+                                            DoctorCorreo = y.Correo,
+                                            ClienteTelefono = g.Telefono,
+                                            ClienteCorreo = g.Correo,
+                                            Comentarios = c.Comentarios
+
                                         })
                              .OrderBy(x => x.Fecha).ToList();
                 return lista;
@@ -229,14 +242,20 @@ namespace PicadoDentalWS.Service
                 {
                     List<CitaPOCO> lista = (from c in e.Citas
                                             join s in e.Clientes
-                                               on c.ClienteID equals s.ClienteID into asd1
-                                            from s in asd1.DefaultIfEmpty()
+                                               on c.ClienteID equals s.ClienteID into InfoCliente
+                                            from s in InfoCliente.DefaultIfEmpty()
                                             join p in e.Personas
-                                                on s.PersonaID equals p.PersonaID into asd2
-                                            from p in asd2.DefaultIfEmpty()
+                                                on s.PersonaID equals p.PersonaID into InfoClientePersona
+                                            from p in InfoClientePersona.DefaultIfEmpty()
+                                            join g in e.Contactoes
+                                                on p.ContactoID equals g.ContactoID into InfoClientePersonaContacto
+                                            from g in InfoClientePersonaContacto.DefaultIfEmpty()
                                             join d in e.Personas
-                                                on c.PersonaID equals d.PersonaID into asd3
-                                            from d in asd3.DefaultIfEmpty()
+                                                on c.PersonaID equals d.PersonaID into InfoDoctor
+                                            from d in InfoDoctor.DefaultIfEmpty()
+                                            join y in e.Contactoes
+                                                on d.ContactoID equals y.ContactoID into InfoDoctorContacto
+                                            from y in InfoDoctorContacto.DefaultIfEmpty()
                                             select new CitaPOCO
                                             {
                                                 Fecha = c.FechaHora,
@@ -245,9 +264,15 @@ namespace PicadoDentalWS.Service
                                                 DoctorNombre = d.Nombre,
                                                 DoctorApellidos = d.PrimerApellido + " " + d.SegundoApellido,
                                                 Detalles = c.DescCita,
-                                                ClienteID = p.Cedula
+                                                ClienteID = c.ClienteID,
+                                                DoctorTelefono = y.Telefono,
+                                                DoctorCorreo = y.Correo,
+                                                ClienteTelefono = g.Telefono,
+                                                ClienteCorreo = g.Correo,
+                                                Comentarios = c.Comentarios
+
                                             })
-                                 .OrderBy(x => x.Fecha).ToList();
+                             .OrderBy(x => x.Fecha).ToList();
 
                     foreach (var i in lista)
                     {
