@@ -7,8 +7,8 @@ namespace PicadoDentalWS.POCO_Models
 {
     public class CitaPOCO
     {
+        public int ClienteID { get; set; }
         public DateTime Fecha { get; set; }
-
         public String ClienteNombre { get; set; }
         public String ClienteApellidos{ get; set; }
         public String DoctorNombre { get; set; }
