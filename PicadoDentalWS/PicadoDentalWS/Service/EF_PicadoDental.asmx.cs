@@ -220,8 +220,8 @@ namespace PicadoDentalWS.Service
                                             DoctorCorreo = y.Correo,
                                             ClienteTelefono = g.Telefono,
                                             ClienteCorreo = g.Correo,
-                                            Comentarios = c.Comentarios
-
+                                            Comentarios = c.Comentarios,
+                                            CitaID = c.CitaID
                                         })
                              .OrderBy(x => x.Fecha).ToList();
                 return lista;
@@ -269,14 +269,14 @@ namespace PicadoDentalWS.Service
                                                 DoctorCorreo = y.Correo,
                                                 ClienteTelefono = g.Telefono,
                                                 ClienteCorreo = g.Correo,
-                                                Comentarios = c.Comentarios
-
+                                                Comentarios = c.Comentarios,
+                                                CitaID = c.CitaID
                                             })
                              .OrderBy(x => x.Fecha).ToList();
 
                     foreach (var i in lista)
                     {
-                        if (i.ClienteID == id)
+                        if (i.CitaID == id)
                         {
                             List<CitaPOCO> encontrado = new List<CitaPOCO>();
                             encontrado.Add(i);

@@ -20,6 +20,7 @@ namespace PicadoDentalWS.POCO_Models
         public String ClienteTelefono { get; set; }
         public String ClienteCorreo { get; set; }
         public String Comentarios { get; set; }
+        public int CitaID { get; set; }
 
     }
 }
