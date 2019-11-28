@@ -223,7 +223,8 @@ namespace PicadoDentalWS.Service
         [WebMethod]
         public List<CitaPOCO> CitaListByID(int id)
         {
-            try {
+            try
+            {
                 using (PD_Entities e = new PD_Entities())
                 {
                     List<CitaPOCO> lista = (from c in e.Citas
@@ -257,10 +258,15 @@ namespace PicadoDentalWS.Service
                             return encontrado;
                         }
                     }
-                    return null;
+
                 }
-            
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return null;
+        }
 
         /// <summary>
         /// Crea nueva cita
