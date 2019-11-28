@@ -103,6 +103,7 @@ namespace PicadoDentalWS.Service
                 {
                     int contactoID = 0;
                     int personaID = 0;
+                    int credencialID = 0;
 
                     e.Contactoes.Add(new Contacto()
                     {
@@ -110,6 +111,14 @@ namespace PicadoDentalWS.Service
                         Telefono = telefono,
                         Correo = correo
                     });
+                    
+                        e.Credencials.Add(new Credencial()
+                        {
+                            CredencialID = credencialID,
+                            Usuario = usuario,
+                            Password = contrasena
+                        });
+                    
                     e.Personas.Add(new Persona()
                     {
                         PersonaID = personaID,
@@ -119,20 +128,15 @@ namespace PicadoDentalWS.Service
                         GeneroID = generoID,
                         ContactoID = contactoID,
                         Cedula = cedula,
-                        TipoCuentaID = tipoCuentaID
+                        TipoCuentaID = tipoCuentaID,
+                        CredencialID = credencialID
+
                     });
                     e.Clientes.Add(new Cliente()
                     {
                         PersonaID = personaID
                     });
-                    if (!usuario.Equals("") && !contrasena.Equals(""))
-                    {
-                        e.Credencials.Add(new Credencial()
-                        {
-                            Usuario = usuario,
-                            Password = contrasena
-                        });
-                    }
+
                     e.SaveChanges();
                 }
                 catch (Exception)
