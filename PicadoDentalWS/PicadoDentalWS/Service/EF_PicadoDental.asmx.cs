@@ -223,44 +223,44 @@ namespace PicadoDentalWS.Service
         [WebMethod]
         public List<CitaPOCO> CitaListByID(int id)
         {
-            try { 
-            using (PD_Entities e = new PD_Entities())
-            {
-                List<CitaPOCO> lista = (from c in e.Citas
-                                        join s in e.Clientes
-                                           on c.ClienteID equals s.ClienteID into asd1
-                                        from s in asd1.DefaultIfEmpty()
-                                        join p in e.Personas
-                                            on s.PersonaID equals p.PersonaID into asd2
-                                        from p in asd2.DefaultIfEmpty()
-                                        join d in e.Personas
-                                            on c.PersonaID equals d.PersonaID into asd3
-                                        from d in asd3.DefaultIfEmpty()
-                                        select new CitaPOCO
-                                        {
-                                            Fecha = c.FechaHora,
-                                            ClienteNombre = p.Nombre,
-                                            ClienteApellidos = p.PrimerApellido + " " + p.SegundoApellido,
-                                            DoctorNombre = d.Nombre,
-                                            DoctorApellidos = d.PrimerApellido + " " + d.SegundoApellido,
-                                            Detalles = c.DescCita,
-                                            ClienteID = p.Cedula
-                                        })
-                             .OrderBy(x => x.Fecha).ToList();
-                
-                foreach (var i in lista)
+            try {
+                using (PD_Entities e = new PD_Entities())
                 {
-                    if(i.ClienteID == id)
-                    {
-                        List<CitaPOCO> encontrado = new List<CitaPOCO>();
-                        encontrado.Add(i);
-                        return encontrado;
-                    }
-                }
+                    List<CitaPOCO> lista = (from c in e.Citas
+                                            join s in e.Clientes
+                                               on c.ClienteID equals s.ClienteID into asd1
+                                            from s in asd1.DefaultIfEmpty()
+                                            join p in e.Personas
+                                                on s.PersonaID equals p.PersonaID into asd2
+                                            from p in asd2.DefaultIfEmpty()
+                                            join d in e.Personas
+                                                on c.PersonaID equals d.PersonaID into asd3
+                                            from d in asd3.DefaultIfEmpty()
+                                            select new CitaPOCO
+                                            {
+                                                Fecha = c.FechaHora,
+                                                ClienteNombre = p.Nombre,
+                                                ClienteApellidos = p.PrimerApellido + " " + p.SegundoApellido,
+                                                DoctorNombre = d.Nombre,
+                                                DoctorApellidos = d.PrimerApellido + " " + d.SegundoApellido,
+                                                Detalles = c.DescCita,
+                                                ClienteID = p.Cedula
+                                            })
+                                 .OrderBy(x => x.Fecha).ToList();
 
-                return null;
+                    foreach (var i in lista)
+                    {
+                        if (i.ClienteID == id)
+                        {
+                            List<CitaPOCO> encontrado = new List<CitaPOCO>();
+                            encontrado.Add(i);
+                            return encontrado;
+                        }
+                    }
+                    return null;
+                }
+            
             }
-        }
 
         /// <summary>
         /// Crea nueva cita
