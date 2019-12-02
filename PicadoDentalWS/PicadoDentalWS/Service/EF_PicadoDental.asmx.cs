@@ -200,7 +200,7 @@ namespace PicadoDentalWS.Service
                                            on c.ClienteID equals s.ClienteID into InfoCliente
                                         from s in InfoCliente.DefaultIfEmpty()
                                         join p in e.Personas
-                                            on s.PersonaID equals p.PersonaID into InfoClientePersona
+                                            on c.PersonaID equals p.PersonaID into InfoClientePersona
                                         from p in InfoClientePersona.DefaultIfEmpty()
                                         join g in e.Contactoes
                                             on p.ContactoID equals g.ContactoID into InfoClientePersonaContacto
@@ -214,8 +214,8 @@ namespace PicadoDentalWS.Service
                                         select new CitaPOCO
                                         {
                                             Fecha = c.FechaHora,
-                                            ClienteNombre = p.Nombre,
-                                            ClienteApellidos = p.PrimerApellido + " " + p.SegundoApellido,
+                                            ClienteNombre = c.Cliente.Persona.Nombre,
+                                            ClienteApellidos = c.Cliente.Persona.PrimerApellido + " " + c.Cliente.Persona.SegundoApellido,
                                             DoctorNombre = d.Nombre,
                                             DoctorApellidos = d.PrimerApellido + " " + d.SegundoApellido,
                                             Detalles = c.DescCita,
@@ -288,6 +288,68 @@ namespace PicadoDentalWS.Service
                         }
                     }
 
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// devuelve lista de doctores para el dropdown de Citas
+        /// </summary>
+        /// <returns>lista de doctores para el dropdown de Citas</returns>
+
+        [WebMethod]
+        public List<CitaPOCO> ListaDoctores()
+        {
+            try
+            {
+                using (PD_Entities e = new PD_Entities())
+                {
+                    List<CitaPOCO> lista = (from c in e.Personas
+                                                      where c.TipoCuenta.DescTipoCuenta.Equals("Doctor")
+
+                                                      select new CitaPOCO
+                                                      {
+                                                           DoctorID = c.PersonaID,
+                                                           DoctorNombre = c.Nombre + " " + c.PrimerApellido + " " + c.SegundoApellido
+                                                      })
+                             .ToList();
+                    return lista;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return null;
+        }
+        /// <summary>
+        /// devuelve lista de clientes para el dropdown de citas
+        /// </summary>
+        /// <returns>lista de clientes para el dropdown de citas</returns>
+
+        [WebMethod]
+        public List<CitaPOCO> ListaClientes()
+        {
+            try
+            {
+                using (PD_Entities e = new PD_Entities())
+                {
+                    List<CitaPOCO> lista = (from c in e.Clientes
+                                            join p in e.Personas
+                                               on c.PersonaID equals p.PersonaID into InfoClientePersona
+                                            from p in InfoClientePersona.DefaultIfEmpty()
+                                            select new CitaPOCO
+                                            {
+                                                ClienteID = c.ClienteID,
+                                                ClienteNombre = p.Nombre + " " + p.PrimerApellido + " " + p.SegundoApellido
+                                            })
+                             .ToList();
+                    return lista;
                 }
             }
             catch (Exception ex)

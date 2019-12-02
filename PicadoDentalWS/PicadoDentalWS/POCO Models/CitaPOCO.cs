@@ -22,5 +22,7 @@ namespace PicadoDentalWS.POCO_Models
         public String Comentarios { get; set; }
         public int CitaID { get; set; }
 
+        public int DoctorID { get; set; }
+
     }
 }
