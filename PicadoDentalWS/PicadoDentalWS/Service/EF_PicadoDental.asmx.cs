@@ -24,7 +24,12 @@ namespace PicadoDentalWS.Service
 
     public class EF_PicadoDental : System.Web.Services.WebService
     {
-
+        /// <summary>
+        /// Realiza validacion de login.
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <param name="contrasena"></param>
+        /// <returns>Array con el nombre y tipo de usuario</returns>
         [WebMethod]
         public string[] LogIn(string usuario, string contrasena)
         {
@@ -42,7 +47,6 @@ namespace PicadoDentalWS.Service
                                     u.TipoCuentaID,
                                     u.Credencial.Usuario
                                 }).ToList();
-
                     if (user.FirstOrDefault() != null)
                     {
                         info[0] = user.FirstOrDefault().Usuario.ToString();
@@ -58,7 +62,6 @@ namespace PicadoDentalWS.Service
             }
             return info;
         }
-
 
         /// <summary>
         /// devuelve lista de clientes
@@ -82,7 +85,7 @@ namespace PicadoDentalWS.Service
         }
 
         /// <summary>
-        /// Crea nueva persona
+        /// Crea nueva persona.
         /// </summary>
         /// <param name="nombre"></param>
         /// <param name="primerApellido"></param>
@@ -111,13 +114,13 @@ namespace PicadoDentalWS.Service
                         Telefono = telefono,
                         Correo = correo
                     });
-                    
-                        e.Credencials.Add(new Credencial()
-                        {
-                            CredencialID = credencialID,
-                            Usuario = usuario,
-                            Password = contrasena
-                        });
+                  
+                    e.Credencials.Add(new Credencial()
+                    {
+                        CredencialID = credencialID,
+                        Usuario = usuario,
+                        Password = contrasena
+                    });
                     
                     e.Personas.Add(new Persona()
                     {
@@ -189,7 +192,6 @@ namespace PicadoDentalWS.Service
         /// devuelve lista de citas
         /// </summary>
         /// <returns>lista de citas</returns>
-
         [WebMethod]
         public List<CitaPOCO> CitaList()
         {
@@ -236,7 +238,6 @@ namespace PicadoDentalWS.Service
         /// devuelve lista de citas por id
         /// </summary>
         /// <returns>lista de citas</returns>
-
         [WebMethod]
         public List<CitaPOCO> CitaListByID(int id)
         {
@@ -287,7 +288,6 @@ namespace PicadoDentalWS.Service
                             return encontrado;
                         }
                     }
-
                 }
             }
             catch (Exception ex)
@@ -327,11 +327,11 @@ namespace PicadoDentalWS.Service
             }
             return null;
         }
+
         /// <summary>
         /// devuelve lista de clientes para el dropdown de citas
         /// </summary>
         /// <returns>lista de clientes para el dropdown de citas</returns>
-
         [WebMethod]
         public List<CitaPOCO> ListaClientes()
         {
@@ -425,7 +425,7 @@ namespace PicadoDentalWS.Service
                     {
                         cita.Comentarios = comentarios;
                     }
-          
+  
                     e.SaveChanges();
                 }
                 catch (Exception)
