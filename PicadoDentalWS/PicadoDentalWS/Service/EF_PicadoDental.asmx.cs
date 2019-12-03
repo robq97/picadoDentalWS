@@ -33,7 +33,7 @@ namespace PicadoDentalWS.Service
         [WebMethod]
         public string[] LogIn(string usuario, string contrasena)
         {
-            string[] info = new string[2];
+            string[] info = new string[3];
 
             try
             {
@@ -53,14 +53,18 @@ namespace PicadoDentalWS.Service
                         info[1] = user.FirstOrDefault().TipoCuentaID.ToString();
                         return info;
                     }
+                    else
+                    {
+                        info[2] = "error";
+                        return info;
+                    }
                 }
             }
             catch (Exception)
             {
-                info[2] = "error";
+                info[2] = "reload";
                 return info;
             }
-            return info;
         }
 
         /// <summary>
