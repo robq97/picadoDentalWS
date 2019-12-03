@@ -357,6 +357,7 @@ namespace PicadoDentalWS.Service
                                         from y in InfoDoctorContacto.DefaultIfEmpty()
                                         select new DoctorPOCO
                                         {
+                                            PersonaID = d.PersonaID,
                                             Nombre = d.Nombre,
                                             Apellidos = d.PrimerApellido + " " + d.SegundoApellido,
                                             Telefono = y.Telefono,
