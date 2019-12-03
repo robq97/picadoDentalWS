@@ -81,11 +81,115 @@ namespace PicadoDentalWS.Service
                     .Select(c => new ClientePOCO() {
                         ClienteID = c.ClienteID,
                         PersonaID = c.PersonaID,
-                        Nombre = c.Persona.Nombre
+                        Nombre = c.Persona.Nombre,
+                        Apellidos = c.Persona.PrimerApellido + " " + c.Persona.SegundoApellido,
+                        Cedula = c.Persona.Cedula,
+                        Genero = c.Persona.Genero.DescGenero,
+                        Correo = c.Persona.Contacto.Correo,
+                        Telefono = c.Persona.Contacto.Telefono
                     })
                     .ToList();
                 return clientes;
             }
+        }
+        /// <summary>
+        /// devuelve lista de clientes para el dropdown de citas
+        /// </summary>
+        /// <returns>lista de clientes para el dropdown de citas</returns>
+        [WebMethod]
+        public List<CitaPOCO> ListaClientes()
+        {
+            try
+            {
+                using (PD_Entities e = new PD_Entities())
+                {
+                    List<CitaPOCO> lista = (from c in e.Clientes
+                                            join p in e.Personas
+                                               on c.PersonaID equals p.PersonaID into InfoClientePersona
+                                            from p in InfoClientePersona.DefaultIfEmpty()
+                                            select new CitaPOCO
+                                            {
+                                                ClienteID = c.ClienteID,
+                                                ClienteNombre = p.Nombre + " " + p.PrimerApellido + " " + p.SegundoApellido
+                                            })
+                             .ToList();
+                    return lista;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return null;
+        }
+        /// <summary>
+        /// devuelve lista de clientes para el dropdown de genero
+        /// </summary>
+        /// <returns>lista de clientes para el dropdown de genero</returns>
+        [WebMethod]
+        public List<ClientePOCO> ListaGenero()
+        {
+            try
+            {
+                using (PD_Entities e = new PD_Entities())
+                {
+                    List<ClientePOCO> lista = (from c in e.Generoes
+                                            select new ClientePOCO
+                                            {
+                                                GeneroID = c.GeneroID,
+                                                Genero = c.DescGenero
+                                            })
+                             .ToList();
+                    return lista;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// devuelve lista de clientes para el dropdown de citas
+        /// </summary>
+        /// <returns>lista de clientes para el dropdown de citas</returns>
+        [WebMethod]
+        public List<ClientePOCO> ObtenerInfoCliente(int id)
+        {
+            try
+            {
+                using (PD_Entities e = new PD_Entities())
+                {
+                    List<ClientePOCO> clientes = e.Clientes
+                    .Select(c => new ClientePOCO()
+                    {
+                        ClienteID = c.ClienteID,
+                        PersonaID = c.PersonaID,
+                        Nombre = c.Persona.Nombre,
+                        Apellidos = c.Persona.PrimerApellido + " " + c.Persona.SegundoApellido,
+                        Cedula = c.Persona.Cedula,
+                        Genero = c.Persona.Genero.DescGenero,
+                        Correo = c.Persona.Contacto.Correo,
+                        Telefono = c.Persona.Contacto.Telefono
+                    })
+                    .ToList();
+                    foreach (var i in clientes)
+                    {
+                        if (i.PersonaID == id)
+                        {
+                            List<ClientePOCO> encontrado = new List<ClientePOCO>();
+                            encontrado.Add(i);
+                            return encontrado;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return null;
         }
 
         /// <summary>
@@ -332,36 +436,7 @@ namespace PicadoDentalWS.Service
             return null;
         }
 
-        /// <summary>
-        /// devuelve lista de clientes para el dropdown de citas
-        /// </summary>
-        /// <returns>lista de clientes para el dropdown de citas</returns>
-        [WebMethod]
-        public List<CitaPOCO> ListaClientes()
-        {
-            try
-            {
-                using (PD_Entities e = new PD_Entities())
-                {
-                    List<CitaPOCO> lista = (from c in e.Clientes
-                                            join p in e.Personas
-                                               on c.PersonaID equals p.PersonaID into InfoClientePersona
-                                            from p in InfoClientePersona.DefaultIfEmpty()
-                                            select new CitaPOCO
-                                            {
-                                                ClienteID = c.ClienteID,
-                                                ClienteNombre = p.Nombre + " " + p.PrimerApellido + " " + p.SegundoApellido
-                                            })
-                             .ToList();
-                    return lista;
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-            return null;
-        }
+        
 
         /// <summary>
         /// Crea nueva cita
