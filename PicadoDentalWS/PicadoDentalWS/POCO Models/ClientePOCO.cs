@@ -9,6 +9,13 @@ namespace PicadoDentalWS.POCOModels
     {
         public int ClienteID { get; set; }
         public int PersonaID { get; set; }
-        public string Nombre { get; set; }
+        public String Nombre { get; set; }
+        public String Apellidos { get; set; }
+        public int Cedula { get; set;}
+        public int GeneroID { get; set; }
+        public String Genero { get; set; }
+        public String Correo { get; set;}
+        public String Telefono { get; set; }
+
     }
 }
