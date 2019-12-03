@@ -53,6 +53,10 @@ namespace PicadoDentalWS.Service
                         info[1] = user.FirstOrDefault().TipoCuentaID.ToString();
                         return info;
                     }
+                    else
+                    {
+                        info[2] = "error";
+                    }
                 }
             }
             catch (Exception)
