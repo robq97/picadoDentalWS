@@ -33,7 +33,7 @@ namespace PicadoDentalWS.Service
         [WebMethod]
         public string[] LogIn(string usuario, string contrasena)
         {
-            string[] info = new string[2];
+            string[] info = new string[3];
 
             try
             {
@@ -56,6 +56,7 @@ namespace PicadoDentalWS.Service
                     else
                     {
                         info[2] = "error";
+                        return info;
                     }
                 }
             }
