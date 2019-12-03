@@ -341,6 +341,33 @@ namespace PicadoDentalWS.Service
                 return lista;
             }
         }
+        /// <summary>
+        /// devuelve lista de citas
+        /// </summary>
+        /// <returns>lista de citas</returns>
+        [WebMethod]
+        public List<DoctorPOCO> DoctorList()
+        {
+            using (PD_Entities e = new PD_Entities())
+            {
+                List<DoctorPOCO> lista = (
+                                        from d in e.Personas where d.TipoCuenta.DescTipoCuenta.Equals("Doctor")
+                                        join y in e.Contactoes
+                                            on d.ContactoID equals y.ContactoID into InfoDoctorContacto
+                                        from y in InfoDoctorContacto.DefaultIfEmpty()
+                                        select new DoctorPOCO
+                                        {
+                                            Nombre = d.Nombre,
+                                            Apellidos = d.PrimerApellido + " " + d.SegundoApellido,
+                                            Telefono = y.Telefono,
+                                            Correo = y.Correo,
+                                            Cedula = d.Cedula
+
+                                        })
+                             .ToList();
+                return lista;
+            }
+        }
 
         /// <summary>
         /// devuelve lista de citas por id
