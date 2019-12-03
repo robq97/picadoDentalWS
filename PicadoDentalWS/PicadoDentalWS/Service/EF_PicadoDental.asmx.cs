@@ -62,10 +62,9 @@ namespace PicadoDentalWS.Service
             }
             catch (Exception)
             {
-                info[2] = "error";
+                info[2] = "reload";
                 return info;
             }
-            return info;
         }
 
         /// <summary>
