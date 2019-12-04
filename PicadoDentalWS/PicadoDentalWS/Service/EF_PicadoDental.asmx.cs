@@ -513,16 +513,19 @@ namespace PicadoDentalWS.Service
             {
                 try
                 {
+                    DateTime fechaHoraConvertida = DateTime.Parse(fechaHora);
                     int personIdInt = Convert.ToInt32(doctorId);
 
                     var cita = e.Citas.Where(s => s.CitaID == citaId).First();
-                    if (doctorId != null)
+
+
+                    if (doctorId != "0")
                     {
                         cita.PersonaID = personIdInt;
                     }
-                    if (fechaHora != null)
+                    if (fechaHoraConvertida.Year!= 1)
                     {
-                        cita.FechaHora = DateTime.Parse(fechaHora);
+                        cita.FechaHora = fechaHoraConvertida;
                     }
                     if (descripcion != null)
                     {
