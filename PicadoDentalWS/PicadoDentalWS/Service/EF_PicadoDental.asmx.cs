@@ -341,6 +341,34 @@ namespace PicadoDentalWS.Service
                 return lista;
             }
         }
+        /// <summary>
+        /// devuelve lista de citas
+        /// </summary>
+        /// <returns>lista de citas</returns>
+        [WebMethod]
+        public List<DoctorPOCO> DoctorList()
+        {
+            using (PD_Entities e = new PD_Entities())
+            {
+                List<DoctorPOCO> lista = (
+                                        from d in e.Personas where d.TipoCuenta.DescTipoCuenta.Equals("Doctor")
+                                        join y in e.Contactoes
+                                            on d.ContactoID equals y.ContactoID into InfoDoctorContacto
+                                        from y in InfoDoctorContacto.DefaultIfEmpty()
+                                        select new DoctorPOCO
+                                        {
+                                            PersonaID = d.PersonaID,
+                                            Nombre = d.Nombre,
+                                            Apellidos = d.PrimerApellido + " " + d.SegundoApellido,
+                                            Telefono = y.Telefono,
+                                            Correo = y.Correo,
+                                            Cedula = d.Cedula
+
+                                        })
+                             .ToList();
+                return lista;
+            }
+        }
 
         /// <summary>
         /// devuelve lista de citas por id
@@ -485,16 +513,19 @@ namespace PicadoDentalWS.Service
             {
                 try
                 {
+                    DateTime fechaHoraConvertida = DateTime.Parse(fechaHora);
                     int personIdInt = Convert.ToInt32(doctorId);
 
                     var cita = e.Citas.Where(s => s.CitaID == citaId).First();
-                    if (doctorId != null)
+
+
+                    if (doctorId != "0")
                     {
                         cita.PersonaID = personIdInt;
                     }
-                    if (fechaHora != null)
+                    if (fechaHoraConvertida.Year!= 1)
                     {
-                        cita.FechaHora = DateTime.Parse(fechaHora);
+                        cita.FechaHora = fechaHoraConvertida;
                     }
                     if (descripcion != null)
                     {

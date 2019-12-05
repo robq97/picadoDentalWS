@@ -129,6 +129,7 @@
       <DependentUpon>PDEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="POCO Models\CitaPOCO.cs" />
+    <Compile Include="POCO Models\DoctorPOCO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\EF_PicadoDental.asmx.cs">
       <DependentUpon>EF_PicadoDental.asmx</DependentUpon>
