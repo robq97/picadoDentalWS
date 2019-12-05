@@ -151,9 +151,9 @@ namespace PicadoDentalWS.Service
         }
 
         /// <summary>
-        /// devuelve lista de clientes para el dropdown de citas
+        /// devuelve la información de un cliente en específico
         /// </summary>
-        /// <returns>lista de clientes para el dropdown de citas</returns>
+        /// <returns>Info de un cliente en específico</returns>
         [WebMethod]
         public List<ClientePOCO> ObtenerInfoCliente(int id)
         {
@@ -179,6 +179,47 @@ namespace PicadoDentalWS.Service
                         if (i.PersonaID == id)
                         {
                             List<ClientePOCO> encontrado = new List<ClientePOCO>();
+                            encontrado.Add(i);
+                            return encontrado;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// devuelve la información de un doctor en específico
+        /// </summary>
+        /// <returns>Info de un doctor en específico</returns>
+        [WebMethod]
+        public List<DoctorPOCO> ObtenerInfoDoctor(int id)
+        {
+            try
+            {
+                using (PD_Entities e = new PD_Entities())
+                {
+                    List<DoctorPOCO> doctor = e.Personas
+                    .Select(c => new DoctorPOCO()
+                    {
+                        PersonaID = c.PersonaID,
+                        Nombre = c.Nombre,
+                        Apellidos = c.PrimerApellido + " " + c.SegundoApellido,
+                        Cedula = c.Cedula,
+                        Genero = c.Genero.DescGenero,
+                        Correo = c.Contacto.Correo,
+                        Telefono = c.Contacto.Telefono
+                    })
+                    .ToList();
+                    foreach (var i in doctor)
+                    {
+                        if (i.PersonaID == id)
+                        {
+                            List<DoctorPOCO> encontrado = new List<DoctorPOCO>();
                             encontrado.Add(i);
                             return encontrado;
                         }
@@ -326,6 +367,7 @@ namespace PicadoDentalWS.Service
                                             Fecha = c.FechaHora,
                                             ClienteNombre = c.Cliente.Persona.Nombre,
                                             ClienteApellidos = c.Cliente.Persona.PrimerApellido + " " + c.Cliente.Persona.SegundoApellido,
+                                            DoctorID = d.PersonaID,
                                             DoctorNombre = d.Nombre,
                                             DoctorApellidos = d.PrimerApellido + " " + d.SegundoApellido,
                                             Detalles = c.DescCita,
@@ -342,9 +384,9 @@ namespace PicadoDentalWS.Service
             }
         }
         /// <summary>
-        /// devuelve lista de citas
+        /// devuelve lista de doctor
         /// </summary>
-        /// <returns>lista de citas</returns>
+        /// <returns>lista de doctor</returns>
         [WebMethod]
         public List<DoctorPOCO> DoctorList()
         {
@@ -367,6 +409,41 @@ namespace PicadoDentalWS.Service
                                         })
                              .ToList();
                 return lista;
+            }
+        }
+        /// <summary>
+        /// Modifica datos de un doctor
+        /// </summary>
+        /// <param name = "personaId" ></ param >
+        /// < param name="telefono"></param>
+        /// <param name = "correo" ></ param >
+        /// < param name="generoID"></param>
+        [WebMethod]
+        public void ModifyDoctor(int personaId, string telefono, string correo)
+        {
+            using (PD_Entities e = new PD_Entities())
+            {
+                try
+                {
+                    var user = (from u in e.Personas
+                                join Contacto in e.Contactoes on u.ContactoID equals Contacto.ContactoID
+                                where u.PersonaID == personaId
+                                select u
+                                ).SingleOrDefault();
+                    if (correo != null)
+                    {
+                        user.Contacto.Correo = correo;
+                    }
+                    if (telefono != null)
+                    {
+                        user.Contacto.Telefono = telefono;
+                    }
+                    e.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    return;
+                }
             }
         }
 
@@ -463,6 +540,7 @@ namespace PicadoDentalWS.Service
             }
             return null;
         }
+
 
         
 

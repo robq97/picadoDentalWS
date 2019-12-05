@@ -13,6 +13,7 @@ namespace PicadoDentalWS.POCO_Models
         public String Correo { get; set; }
         public String Telefono { get; set; }
         public int Cedula { get; set;}
+        public String Genero { get; set; }
         
     }
 }
