@@ -25,11 +25,11 @@ namespace PicadoDentalWS.Service
     public class EF_PicadoDental : System.Web.Services.WebService
     {
         /// <summary>
-        /// Realiza validacion de login.
+        /// Here we realice the validation of the login 
         /// </summary>
         /// <param name="usuario"></param>
         /// <param name="contrasena"></param>
-        /// <returns>Array con el nombre y tipo de usuario</returns>
+        /// <returns></returns>
         [WebMethod]
         public string[] LogIn(string usuario, string contrasena)
         {
@@ -68,9 +68,9 @@ namespace PicadoDentalWS.Service
         }
 
         /// <summary>
-        /// devuelve lista de clientes
+        /// This method returns the client list 
         /// </summary>
-        /// <returns>lista de clientes</returns>
+        /// <returns></returns>
 
         [WebMethod]
         public List<ClientePOCO> ClientList()
@@ -93,9 +93,9 @@ namespace PicadoDentalWS.Service
             }
         }
         /// <summary>
-        /// devuelve lista de clientes para el dropdown de citas
+        /// Returns the client lists for appoinment dropdown
         /// </summary>
-        /// <returns>lista de clientes para el dropdown de citas</returns>
+        /// <returns></returns>
         [WebMethod]
         public List<CitaPOCO> ListaClientes()
         {
@@ -123,9 +123,9 @@ namespace PicadoDentalWS.Service
             return null;
         }
         /// <summary>
-        /// devuelve lista de clientes para el dropdown de genero
+        ///Returns the client lists for Gender dropdown
         /// </summary>
-        /// <returns>lista de clientes para el dropdown de genero</returns>
+        /// <returns></returns>
         [WebMethod]
         public List<ClientePOCO> ListaGenero()
         {
@@ -151,7 +151,7 @@ namespace PicadoDentalWS.Service
         }
 
         /// <summary>
-        /// devuelve lista de clientes para el dropdown de citas
+        /// Returns the client lists for appointment dropdown
         /// </summary>
         /// <returns>lista de clientes para el dropdown de citas</returns>
         [WebMethod]
@@ -193,7 +193,7 @@ namespace PicadoDentalWS.Service
         }
 
         /// <summary>
-        /// Crea nueva persona.
+        /// Method to create a new person.
         /// </summary>
         /// <param name="nombre"></param>
         /// <param name="primerApellido"></param>
@@ -258,7 +258,7 @@ namespace PicadoDentalWS.Service
         }
 
         /// <summary>
-        /// Modifica datos de cliente
+        /// Method to modify the dates of a  client 
         /// </summary>
         /// <param name = "personaId" ></ param >
         /// < param name="telefono"></param>
@@ -293,13 +293,13 @@ namespace PicadoDentalWS.Service
             }
         }
 
-        //Citas
+       
 
 
         /// <summary>
-        /// devuelve lista de citas
+        /// returns the appointment list
         /// </summary>
-        /// <returns>lista de citas</returns>
+        /// <returns></returns>
         [WebMethod]
         public List<CitaPOCO> CitaList()
         {
@@ -342,9 +342,9 @@ namespace PicadoDentalWS.Service
             }
         }
         /// <summary>
-        /// devuelve lista de citas
+        /// returns the appoinment list
         /// </summary>
-        /// <returns>lista de citas</returns>
+        /// <returns></returns>
         [WebMethod]
         public List<DoctorPOCO> DoctorList()
         {
@@ -371,9 +371,9 @@ namespace PicadoDentalWS.Service
         }
 
         /// <summary>
-        /// devuelve lista de citas por id
+        /// returns the appoinment list by the id 
         /// </summary>
-        /// <returns>lista de citas</returns>
+        /// <returns></returns>
         [WebMethod]
         public List<CitaPOCO> CitaListByID(int id)
         {
@@ -434,9 +434,9 @@ namespace PicadoDentalWS.Service
         }
 
         /// <summary>
-        /// devuelve lista de doctores para el dropdown de Citas
+        /// retunrs the doctor list to the appointment dropdown
         /// </summary>
-        /// <returns>lista de doctores para el dropdown de Citas</returns>
+        /// <returns></returns>
 
         [WebMethod]
         public List<CitaPOCO> ListaDoctores()
@@ -467,7 +467,7 @@ namespace PicadoDentalWS.Service
         
 
         /// <summary>
-        /// Crea nueva cita
+        /// Method to create a new appointment
         /// </summary>
         /// <param name = "clienteId" ></ param >
         /// < param name="doctorId"></param>
@@ -499,7 +499,7 @@ namespace PicadoDentalWS.Service
         }
 
         /// <summary>
-        /// Modifica las citas
+        /// Method to modify the appointments
         /// </summary>
         /// <param name = "citaId" ></ param >
         /// < param name="doctorId"></param>
