@@ -45,11 +45,12 @@ namespace PicadoDentalWS.Service
                                 select new
                                 {
                                     u.TipoCuentaID,
-                                    u.Credencial.Usuario
+                                    u.Credencial.Usuario,
+                                    u.PersonaID
                                 }).ToList();
                     if (user.FirstOrDefault() != null)
                     {
-                        info[0] = user.FirstOrDefault().Usuario.ToString();
+                        info[0] = user.FirstOrDefault().PersonaID.ToString();
                         info[1] = user.FirstOrDefault().TipoCuentaID.ToString();
                         return info;
                     }
